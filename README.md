@@ -1,6 +1,4 @@
-#### Курс "[ Network Engineer. Professional ](https://otus.ru/lessons/setevoy-inzhener)" от [OTUS.RU](https://otus.ru/)
+#### Курс "[ Network Engineer.Professional ](https://otus.ru/lessons/setevoy-inzhener)" от [OTUS.RU](https://otus.ru/)
 
- - [Практические работы](labs/).
- - [Проектная работа](final/).
-
-
+ - [Домашнии работы](homework/).
+ - [Проектная работа](projectwork/).
