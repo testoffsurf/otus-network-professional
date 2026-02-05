@@ -1,0 +1,21 @@
+!
+interface Loopback0
+ description ===[ Loopback interface ]===
+ ip address 100.0.0.253 255.255.255.255
+!
+interface Ethernet0/0
+ description ===[ Link: R25 to R23 ]===
+ ip address 10.0.0.6 255.255.255.252
+!
+interface Ethernet0/1
+ description ===[ Link: R25 to R27 ]===
+ ip address 100.0.0.17 255.255.255.252
+!
+interface Ethernet0/2
+ description ===[ Link: R25 to R26 ]===
+ ip address 10.0.0.13 255.255.255.252
+!
+interface Ethernet0/3
+ description ===[ Link: R25 to R28 ]===
+ ip address 100.0.0.13 255.255.255.252
+!
