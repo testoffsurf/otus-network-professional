@@ -32,11 +32,64 @@ router ospf 1
 ```
 
 
+### Маршрутизаторы R12-R13 должны находиться в зоне 10. Дополнительно к маршрутам должны получать маршрут по умолчанию
+На интерфейсах маршрутизаторов R12, R13 и L3-коммутаторов SW4, SW5 смотрящих в зону 10 необходимо сконфигурировать интерфейсы следующим образом:
 
+```
+interface Ethernet X/X
+ ip ospf 1 area 10
+```
 
+А также не забыть запустить процесс OSPF на всех вышеуказанных маршрутизаторах и L3-коммутаторах, прописать необходимые подсети, loopback-интерфейсы и указать ROUTER-ID (пример для маршрутизатора R12):
 
+```
+router ospf 1
+ router-id 10.77.0.251
+ network 10.77.0.24 0.0.0.3 area 10
+ network 10.77.0.28 0.0.0.3 area 10
+```
 
+На маршрутизаторе R14 анонсируем маршрут по умолчанию:
+```
+router ospf 1
+ default-information originate always
+```
 
+Командой <b>show ip route</b> посмотрим, присутствует ли маршрут по умолчанию в зоне 10:
+
+</code></pre>
+</details>
+<details>
+<summary>Area 10</summary>
+<pre><code>
+R13(config)#do sh ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
+
+Gateway of last resort is 10.77.0.9 to network 0.0.0.0
+
+O*E2  0.0.0.0/0 [110/1] via 10.77.0.9, 00:32:52, Ethernet0/3
+      10.0.0.0/8 is variably subnetted, 18 subnets, 2 masks
+O IA     10.77.0.0/30 [110/20] via 10.77.0.9, 00:34:33, Ethernet0/3
+O        10.77.0.4/30 [110/20] via 10.77.0.9, 00:34:33, Ethernet0/3
+C        10.77.0.8/30 is directly connected, Ethernet0/3
+L        10.77.0.10/32 is directly connected, Ethernet0/3
+O        10.77.0.12/30 [110/20] via 10.77.0.17, 00:34:33, Ethernet0/2
+C        10.77.0.16/30 is directly connected, Ethernet0/2
+L        10.77.0.18/32 is directly connected, Ethernet0/2
+O IA     10.77.0.20/30 [110/20] via 10.77.0.17, 00:34:33, Ethernet0/2
+O        10.77.0.24/30 [110/20] via 10.77.0.34, 00:29:57, Ethernet0/1
+</code></pre>
+</details>
+
+Маршрут E*O2 0.0.0.0/0 присутствует в таблице маршрутизации.
 
 
 
