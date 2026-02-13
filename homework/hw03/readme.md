@@ -92,6 +92,70 @@ O        10.77.0.24/30 [110/20] via 10.77.0.34, 00:29:57, Ethernet0/1
 Маршрут E*O2 0.0.0.0/0 присутствует в таблице маршрутизации.
 
 
+### Маршрутизатор R19 находится в зоне 101 и получает только маршрут по умолчанию
+Интерфейс <b>e0/0</b> маршрутизатора R19 сконфигурируем следующим образом:
+
+```
+interface Ethernet0/0
+ ip ospf 1 area 101
+```
+
+Запускаем OSPF процесс на маршрутизаторе R19 и объявляем зону 101 как Totally stub Area.
+<pre><code>
+router ospf 1
+ router-id 10.77.0.252
+ network 10.77.0.0 0.0.0.3 area 101
+ <b>area 101 stub no-summary</b>
+</code></pre>
+
+Также со стороны маршрутизатора R14 зону 101 объявляем как Totally stub Area, тем самым предотвращаем обмен LSA 3 типа. Таблица маршрутизации на R19 имеет следующий вид:
+
+</code></pre>
+</details>
+<details>
+<summary>R19</summary>
+<pre><code>
+R19#sh ip route ospf
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
+
+Gateway of last resort is 10.77.0.1 to network 0.0.0.0
+
+O*IA  0.0.0.0/0 [110/11] via 10.77.0.1, 01:21:11, Ethernet0/0
+</code></pre>
+</details>
+
+Мы видим маршрут как Inter Area. Маршрут остался один, он же Last Resort Gateway.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
