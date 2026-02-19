@@ -7,12 +7,42 @@
   1. В офисе Санкт-Петербург настроить EIGRP
   2. R32 получает только маршрут по умолчанию
   3. R16-17 анонсируют только суммарные префиксы
-  4. Использовать EIGRP named-mode для настройки сети
 
 
 
 
 ### В офисе Санкт-Петербург настроить EIGRP
+Для того чтобы в офисе Санкт-Петербург настроить EIGRP необходимо сначала запустить процесс EIGRP на соответствующих устройствах (маршрутизаторы: R18, R17, R16, R32; L3-коммутаторы SW9 и SW10), прописать подсети, loopback-интерфейсы и указать ROUTER-ID (пример для маршрутизатора R16):
+```
+router eigrp PETER
+ !
+ address-family ipv4 unicast autonomous-system 1
+  !
+  network 10.78.0.0 0.0.0.3
+  network 10.78.0.4 0.0.0.3
+  network 10.78.0.8 0.0.0.3
+  network 10.78.0.12 0.0.0.3
+  network 10.78.0.252 0.0.0.0
+  eigrp router-id 10.78.0.252
+ exit-address-family
+```
+
+Командой <b>show ip eigrp neighbors</b> список всех EIGRP-соседей:
+</code></pre>
+</details>
+<details>
+<summary>show ip eigrp neighbors</summary>
+<pre><code>
+R16#sh ip eigrp neighbors
+EIGRP-IPv4 VR(PETER) Address-Family Neighbors for AS(1)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+3   10.78.0.1               Et0/1                     8 02:26:15    5   100  0  26
+2   10.78.0.6               Et0/3                     9 02:26:17    5   100  0  9
+1   10.78.0.14              Et0/2                     9 02:26:32    5   100  0  44
+0   10.78.0.10              Et0/0                     8 02:26:32    4   100  0  36
+</code></pre>
+</details>
 
 
 ### R32 получает только маршрут по умолчанию
@@ -126,7 +156,11 @@ C        10.78.0.251/32 is directly connected, Loopback0
 
 
 
-### Использовать EIGRP named-mode для настройки сети
+
+
+
+
+
 
 
 
