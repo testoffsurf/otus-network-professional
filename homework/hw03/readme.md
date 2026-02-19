@@ -184,7 +184,7 @@ ip prefix-list PFL-AREA101:
 </code></pre>
 </details>
 <details>
-<summary>show ip prefix-list detail</summary>
+<summary>show ip route</summary>
 <pre><code>
 R20#show ip route
 Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
