@@ -36,21 +36,21 @@ Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
 Gateway of last resort is not set
 
       10.0.0.0/8 is variably subnetted, 15 subnets, 3 masks
-D        10.78.0.0/30 [90/2048000] via 10.78.0.25, 00:29:10, Ethernet0/0
-D        10.78.0.4/30 [90/1536000] via 10.78.0.25, 00:29:10, Ethernet0/0
-D        10.78.0.8/30 [90/2048000] via 10.78.0.25, 00:18:02, Ethernet0/0
-D        10.78.0.12/30 [90/2048000] via 10.78.0.25, 00:08:33, Ethernet0/0
-D        10.78.0.16/30 [90/1536000] via 10.78.0.25, 00:29:10, Ethernet0/0
-D        10.78.0.20/30 [90/1536000] via 10.78.0.25, 00:29:10, Ethernet0/0
-C        10.78.0.24/30 is directly connected, Ethernet0/0
-L        10.78.0.26/32 is directly connected, Ethernet0/0
-D        10.78.0.249/32 [90/1536640] via 10.78.0.25, 00:09:05, Ethernet0/0
-D        10.78.0.250/32 [90/1536640] via 10.78.0.25, 00:17:34, Ethernet0/0
+D        10.78.0.0/30 [90/1536000] via 10.78.0.5, 00:02:24, Ethernet0/0
+C        10.78.0.4/30 is directly connected, Ethernet0/0
+L        10.78.0.6/32 is directly connected, Ethernet0/0
+D        10.78.0.8/30 [90/1536000] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.12/30 [90/1536000] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.16/30 [90/2048000] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.20/30 [90/2048000] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.24/30 [90/2048000] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.249/32 [90/1536640] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.250/32 [90/1536640] via 10.78.0.5, 00:02:24, Ethernet0/0
 C        10.78.0.251/32 is directly connected, Loopback0
-D        10.78.0.252/32 [90/1024640] via 10.78.0.25, 00:29:10, Ethernet0/0
-D        10.78.0.253/32 [90/2048640] via 10.78.0.25, 00:29:10, Ethernet0/0
-D        10.78.0.254/32 [90/1536640] via 10.78.0.25, 00:29:10, Ethernet0/0
-D        10.78.1.0/24 [90/1541120] via 10.78.0.25, 00:16:16, Ethernet0/0
+D        10.78.0.252/32 [90/1024640] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.253/32 [90/2048640] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.0.254/32 [90/1536640] via 10.78.0.5, 00:02:24, Ethernet0/0
+D        10.78.1.0/24 [90/1541120] via 10.78.0.5, 00:02:24, Ethernet0/0
 </code></pre>
 </details>
 
@@ -108,18 +108,17 @@ Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
        a - application route
        + - replicated route, % - next hop override
 
-Gateway of last resort is 10.78.0.25 to network 0.0.0.0
+Gateway of last resort is 10.78.0.5 to network 0.0.0.0
 
-D*EX  0.0.0.0/0 [170/2048000] via 10.78.0.25, 00:42:22, Ethernet0/0
+D*EX  0.0.0.0/0 [170/2048000] via 10.78.0.5, 00:01:10, Ethernet0/0
       10.0.0.0/8 is variably subnetted, 3 subnets, 2 masks
-C        10.78.0.24/30 is directly connected, Ethernet0/0
-L        10.78.0.26/32 is directly connected, Ethernet0/0
+C        10.78.0.4/30 is directly connected, Ethernet0/0
+L        10.78.0.6/32 is directly connected, Ethernet0/0
 C        10.78.0.251/32 is directly connected, Loopback0
 </code></pre>
 </details>
 
 Мы видим что в таблице маршрутизации отсутствует все подсети, кроме маршрута по умолчанию.
-
 
 
 ### R16-17 анонсируют только суммарные префиксы
