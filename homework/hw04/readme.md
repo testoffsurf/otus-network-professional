@@ -72,6 +72,59 @@ R24(config-if)#isis circuit-type level-2-only
 R24(config-if)#exit
 ```
 
+Посмотрим списки установившихся IS-IS-соседей на маршрутизаторах R23 и R24:
+</code></pre>
+</details>
+<details>
+<summary>R24</summary>
+<pre><code>
+R24#sh isis neighbors
+
+Tag TRIADA:
+System Id      Type Interface   IP Address      State Holdtime Circuit Id
+R23            L2   Et0/2       10.0.0.1        UP    26       R24.02
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>R23</summary>
+<pre><code>
+R23#sh isis neighbors
+
+Tag TRIADA:
+System Id      Type Interface   IP Address      State Holdtime Circuit Id
+R24            L2   Et0/2       10.0.0.2        UP    8        R24.02
+R25            L1   Et0/1       10.0.0.6        UP    8        R25.01
+</code></pre>
+</details>
+
+Мы видим что у маршрутизатора R23 два соседа: R24 - с уровнем соседства L2 и R25 - c уровнем соседства L1.
+
+
+### R26 находится в зоне 26
+Запускаем процесс IS-IS на маршрутизаторе R26, прописываем область AREA 26 (49.0026), указываем правило формирования соседства и включаем протокол IS-IS на необходимых нам интерфейсах:
+
+```
+R26(config)#router isis TRIADA
+R26(config-router)#net 49.0026.1000.0000.0254.00
+R26(config-router)#is-type level-2-only
+R26(config-router)#exit
+
+R26(config)#interface Ethernet0/0
+R26(config-if)#ip router isis TRIADA
+R26(config-if)#isis circuit-type level-2-only
+R26(config-if)#exit
+
+R26(config)#interface Ethernet0/2
+R26(config-if)#ip router isis TRIADA
+R26(config-if)#isis circuit-type level-2-only
+R26(config-if)#exit
+```
+
+
+
 
 
 
