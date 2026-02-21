@@ -133,11 +133,26 @@ R25(config)#no ip route 100.0.0.254 255.255.255.255 10.0.0.14
 R26(config)#no ip route 100.0.0.253 255.255.255.255 10.0.0.13
 ```
 
+Пропингуем loopback-интерфейсы маршрутизаторов R25 и R26 с рабочей станции из офиса Чокурдах:
 
+```
+VPCS> ping 100.0.0.253
 
+84 bytes from 100.0.0.253 icmp_seq=1 ttl=254 time=1.792 ms
+84 bytes from 100.0.0.253 icmp_seq=2 ttl=254 time=6.286 ms
+84 bytes from 100.0.0.253 icmp_seq=3 ttl=254 time=4.693 ms
+84 bytes from 100.0.0.253 icmp_seq=4 ttl=254 time=3.396 ms
+84 bytes from 100.0.0.253 icmp_seq=5 ttl=254 time=6.896 ms
 
+VPCS> ping 100.0.0.254
 
+84 bytes from 100.0.0.254 icmp_seq=1 ttl=254 time=1.208 ms
+84 bytes from 100.0.0.254 icmp_seq=2 ttl=254 time=4.871 ms
+84 bytes from 100.0.0.254 icmp_seq=3 ttl=254 time=2.914 ms
+84 bytes from 100.0.0.254 icmp_seq=4 ttl=254 time=5.300 ms
+84 bytes from 100.0.0.254 icmp_seq=5 ttl=254 time=3.439 ms
 
+```
 
 <br>
 
