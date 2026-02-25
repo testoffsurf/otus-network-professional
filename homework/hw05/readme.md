@@ -10,9 +10,9 @@
 
 
 
-
+<br>
 ### Топология
-<center><img src="eigrp.png" align="middle"></center><br>
+<center><img src="eigrp.png" align="middle"></center>
 
 
 ### В офисе Санкт-Петербург настроить EIGRP
