@@ -9,8 +9,8 @@
   3. R16-17 анонсируют только суммарные префиксы
 
 
-
 <br>
+
 ### Топология
 <center><img src="eigrp.png" align="middle"></center>
 
