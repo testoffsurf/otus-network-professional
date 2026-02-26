@@ -279,7 +279,7 @@ D        10.78.1.0/24 [90/1029120] via 10.78.0.22, 01:08:02, Ethernet0/0
 </code></pre>
 </details>
 <details>
-<summary>R17</summary>
+<summary>R18</summary>
 <pre><code>
 R18#sh ip route eigrp
 Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
