@@ -156,20 +156,163 @@ C        10.78.0.251/32 is directly connected, Loopback0
 
 
 ### R16-17 анонсируют только суммарные префиксы
+Маршрутизатор R16 анонсирует следующие сети: 10.78.0.0/30, 10.78.0.4/30, 10.78.0.8/30 и 10.78.0.12/30. А маршрутизатор R17 анонсирует сети: 10.78.0.16/30, 10.78.0.20/30 и 10.78.0.24/30. Просуммируем анонсируемые сети вручную и пропишим суммарный маршрут на всех интерфейсах соответствующего маршрутизатора:
 
+Суммарный маршрут для маршрутизатора R16 будет 10.78.0.0 255.255.255.240:
+```
+R16(config)#router eigrp PETER
+R16(config-router)# address-family ipv4 unicast autonomous-system 1
+R16(config-router-af)#af-interface e0/1
+R16(config-router-af-interface)#summary-address 10.78.0.0 255.255.255.240
+R16(config-router-af-interface)#exit
+R16(config-router-af)#af-interface e0/2
+R16(config-router-af-interface)#summary-address 10.78.0.0 255.255.255.240
+R16(config-router-af-interface)#exit
+R16(config-router-af)#af-interface e0/3
+R16(config-router-af-interface)#summary-address 10.78.0.0 255.255.255.240
+R16(config-router-af-interface)#exit
+R16(config-router-af)#af-interface e0/0
+R16(config-router-af-interface)#summary-address 10.78.0.0 255.255.255.240
+R16(config-router-af-interface)#exit
+R16(config-router-af)#exit
+R16(config-router)#exit
+```
 
+Суммарный маршрут для маршрутизатора R17 будет 10.78.0.16 255.255.255.240:
+```
+R17(config)#router eigrp PETER
+R17(config-router)# address-family ipv4 unicast autonomous-system 1
+R17(config-router-af)#af-interface e0/1
+R17(config-router-af-interface)#summary-address 10.78.0.16 255.255.255.240
+R17(config-router-af-interface)#exit
+R17(config-router-af)#af-interface e0/2
+R17(config-router-af-interface)#summary-address 10.78.0.16 255.255.255.240
+R17(config-router-af-interface)#exit
+R17(config-router-af)#af-interface e0/0
+R17(config-router-af-interface)#summary-address 10.78.0.16 255.255.255.240
+R17(config-router-af-interface)#exit
+R17(config-router-af)#exit
+R17(config-router)#exit
+```
 
+Посмотрим таблицы маршрутизации на маршрутизаторах R16, R17 и R18:
+</code></pre>
+</details>
+<details>
+<summary>R16</summary>
+<pre><code>
+R16#sh ip route eigrp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
 
+Gateway of last resort is 10.78.0.1 to network 0.0.0.0
 
+D*EX  0.0.0.0/0 [170/1536000] via 10.78.0.1, 01:06:07, Ethernet0/1
+      10.0.0.0/8 is variably subnetted, 20 subnets, 4 masks
+D        10.78.0.0/28 is a summary, 01:06:18, Null0
+D        10.78.0.16/28 [90/2048000] via 10.78.0.14, 01:06:02, Ethernet0/2
+                       [90/2048000] via 10.78.0.10, 01:06:02, Ethernet0/0
+                       [90/2048000] via 10.78.0.1, 01:06:02, Ethernet0/1
+D        10.78.0.16/30 [90/1536000] via 10.78.0.10, 01:06:11, Ethernet0/0
+D        10.78.0.20/30 [90/1536000] via 10.78.0.14, 01:06:10, Ethernet0/2
+D        10.78.0.24/30 [90/1536000] via 10.78.0.1, 01:06:07, Ethernet0/1
+D        10.78.0.249/32 [90/1024640] via 10.78.0.10, 01:06:11, Ethernet0/0
+D        10.78.0.250/32 [90/1024640] via 10.78.0.14, 01:06:10, Ethernet0/2
+D        10.78.0.251/32 [90/1024640] via 10.78.0.6, 01:06:14, Ethernet0/3
+D        10.78.0.253/32 [90/1536640] via 10.78.0.14, 01:06:02, Ethernet0/2
+                        [90/1536640] via 10.78.0.10, 01:06:02, Ethernet0/0
+                        [90/1536640] via 10.78.0.1, 01:06:02, Ethernet0/1
+D        10.78.0.254/32 [90/1024640] via 10.78.0.1, 01:06:07, Ethernet0/1
+D        10.78.1.0/24 [90/1029120] via 10.78.0.14, 01:06:10, Ethernet0/2
+                      [90/1029120] via 10.78.0.10, 01:06:10, Ethernet0/0
+</code></pre>
+</details>
 
+</code></pre>
+</details>
+<details>
+<summary>R17</summary>
+<pre><code>
+R17#sh ip route eigrp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
 
+Gateway of last resort is 10.78.0.25 to network 0.0.0.0
 
+D*EX  0.0.0.0/0 [170/1536000] via 10.78.0.25, 01:07:58, Ethernet0/1
+      10.0.0.0/8 is variably subnetted, 18 subnets, 4 masks
+D        10.78.0.0/28 [90/2048000] via 10.78.0.25, 01:07:55, Ethernet0/1
+                      [90/2048000] via 10.78.0.22, 01:07:55, Ethernet0/0
+                      [90/2048000] via 10.78.0.18, 01:07:55, Ethernet0/2
+D        10.78.0.0/30 [90/1536000] via 10.78.0.25, 01:07:58, Ethernet0/1
+D        10.78.0.8/30 [90/1536000] via 10.78.0.18, 01:08:02, Ethernet0/2
+D        10.78.0.12/30 [90/1536000] via 10.78.0.22, 01:08:02, Ethernet0/0
+D        10.78.0.16/28 is a summary, 01:08:10, Null0
+D        10.78.0.249/32 [90/1024640] via 10.78.0.18, 01:08:02, Ethernet0/2
+D        10.78.0.250/32 [90/1024640] via 10.78.0.22, 01:08:02, Ethernet0/0
+D        10.78.0.251/32 [90/2048640] via 10.78.0.25, 01:07:55, Ethernet0/1
+                        [90/2048640] via 10.78.0.22, 01:07:55, Ethernet0/0
+                        [90/2048640] via 10.78.0.18, 01:07:55, Ethernet0/2
+D        10.78.0.252/32 [90/1536640] via 10.78.0.25, 01:07:55, Ethernet0/1
+                        [90/1536640] via 10.78.0.22, 01:07:55, Ethernet0/0
+                        [90/1536640] via 10.78.0.18, 01:07:55, Ethernet0/2
+D        10.78.0.254/32 [90/1024640] via 10.78.0.25, 01:07:58, Ethernet0/1
+D        10.78.1.0/24 [90/1029120] via 10.78.0.22, 01:08:02, Ethernet0/0
+                      [90/1029120] via 10.78.0.18, 01:08:02, Ethernet0/2
+</code></pre>
+</details>
 
+</code></pre>
+</details>
+<details>
+<summary>R17</summary>
+<pre><code>
+R18#sh ip route eigrp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
 
+Gateway of last resort is 100.0.0.21 to network 0.0.0.0
 
+      10.0.0.0/8 is variably subnetted, 17 subnets, 4 masks
+D        10.78.0.0/28 [90/1536000] via 10.78.0.2, 01:09:47, Ethernet0/0
+D        10.78.0.8/30 [90/2048000] via 10.78.0.26, 01:09:50, Ethernet0/1
+D        10.78.0.12/30 [90/2048000] via 10.78.0.26, 01:09:50, Ethernet0/1
+D        10.78.0.16/28 [90/1536000] via 10.78.0.26, 01:09:44, Ethernet0/1
+D        10.78.0.16/30 [90/2048000] via 10.78.0.2, 01:09:49, Ethernet0/0
+D        10.78.0.20/30 [90/2048000] via 10.78.0.2, 01:09:49, Ethernet0/0
+D        10.78.0.249/32 [90/1536640] via 10.78.0.26, 01:09:49, Ethernet0/1
+                        [90/1536640] via 10.78.0.2, 01:09:49, Ethernet0/0
+D        10.78.0.250/32 [90/1536640] via 10.78.0.26, 01:09:49, Ethernet0/1
+                        [90/1536640] via 10.78.0.2, 01:09:49, Ethernet0/0
+D        10.78.0.251/32 [90/1536640] via 10.78.0.2, 01:09:47, Ethernet0/0
+D        10.78.0.252/32 [90/1024640] via 10.78.0.2, 01:09:47, Ethernet0/0
+D        10.78.0.253/32 [90/1024640] via 10.78.0.26, 01:09:44, Ethernet0/1
+D        10.78.1.0/24 [90/1541120] via 10.78.0.26, 01:09:49, Ethernet0/1
+                      [90/1541120] via 10.78.0.2, 01:09:49, Ethernet0/0
+</code></pre>
+</details>
 
 <br>
 
 Полные файлы изменений приведены [здесь](config/)
-
-
