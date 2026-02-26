@@ -6,3 +6,6 @@
 4. [IS-IS. Advanced](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw04)
 5. [EIGRP. Продолжение](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw05)
 6. [BGP. Продолжение](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw06)
+7. [Масштабируемость и дизайн iBGP](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw07)
+8. [BGP. Управление анонсами](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw08)
+9. [Использование BGP для маршрутизации IPv6](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw09)
