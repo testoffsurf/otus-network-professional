@@ -11,8 +11,10 @@
   5. Организуете IP доступность между пограничным роутерами офисами Москва и С.-Петербург.
 
 
+<br>
+
 ### Топология
-<center><img src="bgp.png" align="middle"></center>
+<center><img src="bgp_extension.png" align="middle"></center>
 
 <br>
 
