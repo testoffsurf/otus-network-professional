@@ -47,7 +47,7 @@ R21(config-router)#neighbor 100.77.0.6 remote-as 1001
 R21(config-router)#exit
 ```
 
-Командой <b>show ip bgp neighbors</b> посмотрим информацию о BGP-соседях ():
+Командой <b>show ip bgp neighbors</b> посмотрим информацию о BGP-соседях:
 </code></pre>
 </details>
 <details>
@@ -70,8 +70,7 @@ BGP neighbor is 100.78.0.1,  remote AS 101, external link
 </code></pre>
 </details>
 
-
-
+### Настроите eBGP между провайдерами Киторн и Ламас
 
 
 
