@@ -34,15 +34,11 @@ R15(config-router)#exit
 
 R22(config)#router bgp 101
 R22(config-router)#bgp log-neighbor-changes
-R22(config-router)#neighbor 100.0.0.1 remote-as 520
-R22(config-router)#neighbor 100.77.0.1 remote-as 301
 R22(config-router)#neighbor 100.78.0.2 remote-as 1001
 R22(config-router)#exit
 
 R21(config)#router bgp 301
 R21(config-router)#bgp log-neighbor-changes
-R21(config-router)#neighbor 100.0.0.5 remote-as 520
-R21(config-router)#neighbor 100.77.0.2 remote-as 101
 R21(config-router)#neighbor 100.77.0.6 remote-as 1001
 R21(config-router)#exit
 ```
@@ -70,10 +66,7 @@ BGP neighbor is 100.78.0.1,  remote AS 101, external link
 </code></pre>
 </details>
 
-Мы видим что у маршрутизатора R14 один сосед с IP-адресом 100.78.0.1 в автономной системе 101. Состояние BGP-соседства – <b>Established</b>.
-
-
-
+Мы видим что у маршрутизатора R14 один сосед с IP-адресом 100.78.0.1 в автономной системе 101. Состояние BGP-соседства – <b>ESTABLISHED</b>.
 
 ### Настроите eBGP между провайдерами Киторн и Ламас
 
