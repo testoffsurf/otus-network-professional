@@ -32,7 +32,19 @@ R15(config-router)#bgp log-neighbor-changes
 R15(config-router)#neighbor 100.77.0.5 remote-as 301
 R15(config-router)#exit
 
+R22(config)#router bgp 101
+R22(config-router)#bgp log-neighbor-changes
+R22(config-router)#neighbor 100.0.0.1 remote-as 520
+R22(config-router)#neighbor 100.77.0.1 remote-as 301
+R22(config-router)#neighbor 100.78.0.2 remote-as 1001
+R22(config-router)#exit
 
+R21(config)#router bgp 301
+R21(config-router)#bgp log-neighbor-changes
+R21(config-router)#neighbor 100.0.0.5 remote-as 520
+R21(config-router)#neighbor 100.77.0.2 remote-as 101
+R21(config-router)#neighbor 100.77.0.6 remote-as 1001
+R21(config-router)#exit
 ```
 
 
