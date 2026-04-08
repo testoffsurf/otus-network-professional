@@ -145,7 +145,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 Мы видим что у маршрутизатора R24 один BGP-сосед с IP-адресом 100.0.0.6 в автономной системе 301.
 
 ### Настроите eBGP между офисом С.-Петербург и провайдером Триада
-Для того чтобы настроить eBGP между офисом С.-Петербург и интернет провайдером Триада нам необходимо на соответствующих устройствах (маршрутизаторы: R24, R18) дописать необходимые нам соседства. А еще на маршрутизаторе R18 запустить BGP процесс.
+Для того чтобы настроить eBGP между офисом С.-Петербург и интернет провайдером Триада нам необходимо на соответствующих устройствах (маршрутизаторы: R24, R18, R26) дописать необходимые нам соседства. А на маршрутизаторах R18 и R26 запустить BGP процессы.
 
 ```
 R24(config)#router bgp 520
@@ -154,8 +154,14 @@ R24(config-router)#exit
 
 R18(config)#router bgp 2042
 R18(config-router)#bgp log-neighbor-changes
+R18(config-router)#neighbor 100.0.0.21 remote-as 520
 R18(config-router)#neighbor 100.0.0.9 remote-as 520
 R18(config-router)#exit
+
+R26(config)#router bgp 520
+R26(config-router)#bgp log-neighbor-changes
+R26(config-router)#neighbor 100.0.0.22 remote-as 2042
+R26(config-router)#exit
 ```
 
 Воспользуемся командой <b>show ip bgp summary</b> чтобы посмотреть краткую информацию о состоянии BGP-соединении на конкретном маршрутизаторе:
