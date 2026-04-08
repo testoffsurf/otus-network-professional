@@ -43,7 +43,7 @@ R21(config-router)#neighbor 100.77.0.6 remote-as 1001
 R21(config-router)#exit
 ```
 
-Командой <b>show ip bgp neighbors</b> посмотрим информацию о BGP-соседях:
+Командой <b>show ip bgp neighbors</b> посмотрим детальную информацию о BGP-соседях:
 </code></pre>
 </details>
 <details>
@@ -69,13 +69,35 @@ BGP neighbor is 100.78.0.1,  remote AS 101, external link
 Мы видим что у маршрутизатора R14 один сосед с IP-адресом 100.78.0.1 в автономной системе 101. Состояние BGP-соседства – <b>ESTABLISHED</b>.
 
 ### Настроите eBGP между провайдерами Киторн и Ламас
+Так как BGP процесс уже запушен на предыдущем шаге и для того чтобы настроить eBGP между двумя интернет провайдерами Киторн и Ламас, нам необходимо всего лишь в текущий BGP процесс на соответствующих устройствах (маршрутизаторы: R22, R21) дописать необходимые нам соседства.
 
+```
+R22(config)#router bgp 101
+R22(config-router)#neighbor 100.77.0.1 remote-as 301
+R22(config-router)#exit
 
+R21(config)#router bgp 301
+R21(config-router)#neighbor 100.77.0.2 remote-as 101
+R21(config-router)#exit
+```
 
+Воспользуемся командой <b>show ip bgp summary</b> чтобы посмотреть краткую информацию о состоянии BGP-соединении на конкретном маршрутизаторе:
+</code></pre>
+</details>
+<details>
+<summary>show ip bgp summary</summary>
+<pre><code>
+R21#show ip bgp summary
+BGP router identifier 100.77.0.254, local AS number 301
+BGP table version is 1, main routing table version 1
 
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.77.0.2      4          101       4       4        1    0    0 00:02:20        0
+100.77.0.6      4         1001      15      16        1    0    0 00:10:41        0
+</code></pre>
+</details>
 
-
-
+Мы видим что у маршрутизатора R21 два BGP-соседа: один сосед с IP-адресом 100.77.0.2 в автономной системе 101; второй сосед с IP-адресом 100.77.0.6 в автономной системе 1001. По состоянию колонки "UP/DOWN" мы можем определить 
 
 
 
