@@ -114,7 +114,7 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </code></pre>
 </details>
 
-
+### Настроите eBGP между провайдерами Ламас и Триада
 
 
 
