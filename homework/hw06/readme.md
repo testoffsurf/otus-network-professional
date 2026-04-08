@@ -115,6 +115,41 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </details>
 
 ### Настроите eBGP между провайдерами Ламас и Триада
+Для того чтобы настроить eBGP между провайдерами Ламас и Триада нам необходимо на соответствующих устройствах (маршрутизаторы: R24, R21) дописать необходимые нам соседства.
+
+```
+R24(config)#router bgp 520
+R24(config-router)#neighbor 100.0.0.6 remote-as 301
+R24(config-router)#exit
+
+R21(config)#router bgp 301
+R21(config-router)#neighbor 100.0.0.5 remote-as 520
+R21(config-router)#exit
+```
+
+Воспользуемся командой <b>show ip bgp summary</b> чтобы посмотреть краткую информацию о состоянии BGP-соединении на конкретном маршрутизаторе:
+</code></pre>
+</details>
+<details>
+<summary>show ip bgp summary</summary>
+<pre><code>
+R24#show ip bgp summary
+BGP router identifier 100.0.0.252, local AS number 520
+BGP table version is 1, main routing table version 1
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.0.0.6       4          301       4       6        1    0    0 00:01:59        0
+</code></pre>
+</details>
+
+Мы видим что у маршрутизатора R24 один BGP-соседа с IP-адресом 100.0.0.6 в автономной системе 301.
+
+
+
+
+
+
+
 
 
 
