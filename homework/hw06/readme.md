@@ -97,8 +97,22 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </code></pre>
 </details>
 
-Мы видим что у маршрутизатора R21 два BGP-соседа: один сосед с IP-адресом 100.77.0.2 в автономной системе 101; второй сосед с IP-адресом 100.77.0.6 в автономной системе 1001. По состоянию колонки "UP/DOWN" мы можем определить 
+Мы видим что у маршрутизатора R21 два BGP-соседа: один сосед с IP-адресом 100.77.0.2 в автономной системе 101; второй сосед с IP-адресом 100.77.0.6 в автономной системе 1001. По состоянию колонки "State/PfxRcd" мы можем определить в каком состоянии находиться то или иное соседство.
 
+</code></pre>
+</details>
+<details>
+<summary>State/PfxRcd</summary>
+<pre><code>
+R21#sh ip bgp summary
+BGP router identifier 100.77.0.254, local AS number 301
+BGP table version is 1, main routing table version 1
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.77.0.2      4          101      24      23        1    0    0 00:19:43        0
+100.77.0.6      4         1001       0       0        1    0    0 00:01:23 Idle
+</code></pre>
+</details>
 
 
 
