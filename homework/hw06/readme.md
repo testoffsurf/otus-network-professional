@@ -207,9 +207,7 @@ Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
        o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
        a - application route
        + - replicated route, % - next hop override
-
 Gateway of last resort is not set
-
       100.0.0.0/8 is variably subnetted, 8 subnets, 2 masks
 B        100.0.0.0/30 [20/0] via 100.78.0.1, 00:34:19
 B        100.0.0.4/30 [20/0] via 100.78.0.1, 00:30:15
