@@ -191,7 +191,6 @@ device(config-router)#network xxx.xxx.xxx.xxx mask xxx.xxx.xxx.xxx
 ```
 
 Посмотрим таблицы маршрутизации на маршрутизаторах R14 и R18:
-
 </code></pre>
 </details>
 <details>
@@ -217,7 +216,6 @@ B        100.77.0.0/30 [20/0] via 100.78.0.1, 00:34:50
 B        100.77.0.4/30 [20/0] via 100.78.0.1, 00:30:46
 </code></pre>
 </details>
-
 </code></pre>
 </details>
 <details>
@@ -263,7 +261,6 @@ VRF info: (vrf in name/id, vrf out name/id)
 
 <br>
 Воспользуемся командой <b>ping</b> на маршрутизаторе R18 и проверим доступность IP-адреса 100.78.0.2 на маршрутизаторе R14 (интерфейс e0/2):
-
 </code></pre>
 </details>
 <details>
