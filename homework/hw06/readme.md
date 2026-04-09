@@ -243,7 +243,8 @@ B        100.78.0.0/30 [20/0] via 100.0.0.9, 00:39:58
 </code></pre>
 </details>
 
-Воспользуемся командой <b>traceroute</b> на маршрутизаторе R14 и посмотрим какой путь проходит пакет от источника до IP-адреса назначения 100.0.0.10 (R18.e0/2). 
+Воспользуемся командой <b>traceroute</b> на маршрутизаторе R14 и посмотрим какой путь проходит пакет от источника до IP-адреса назначения 100.0.0.10 (R18.e0/2).
+
 </code></pre>
 </details>
 <details>
@@ -260,16 +261,15 @@ VRF info: (vrf in name/id, vrf out name/id)
 </code></pre>
 </details>
 
+Воспользуемся командой <b>ping</b> на маршрутизаторе R18 и проверим доступность IP-адреса 100.78.0.2 на маршрутизаторе R14 (интерфейс e0/2).
 
-
-
-
-
-
-
-
-
-
+```
+R18#ping 100.78.0.2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 100.78.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+```
 
 <br>
 
