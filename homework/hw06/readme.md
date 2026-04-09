@@ -190,6 +190,46 @@ device(config)#router bgp XXX
 device(config-router)#network xxx.xxx.xxx.xxx mask xxx.xxx.xxx.xxx
 ```
 
+Посмотрим таблицы маршрутизации на маршрутизаторах R14 и R18:
+
+</code></pre>
+</details>
+<details>
+<summary>R14</summary>
+<pre><code>
+R14#sh ip route bgp
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override
+
+Gateway of last resort is not set
+
+      100.0.0.0/8 is variably subnetted, 8 subnets, 2 masks
+B        100.0.0.0/30 [20/0] via 100.78.0.1, 00:34:19
+B        100.0.0.4/30 [20/0] via 100.78.0.1, 00:30:15
+B        100.0.0.8/30 [20/0] via 100.78.0.1, 00:24:24
+B        100.0.0.20/30 [20/0] via 100.78.0.1, 00:19:35
+B        100.77.0.0/30 [20/0] via 100.78.0.1, 00:34:50
+B        100.77.0.4/30 [20/0] via 100.78.0.1, 00:30:46
+</code></pre>
+</details>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
