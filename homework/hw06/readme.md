@@ -243,8 +243,22 @@ B        100.78.0.0/30 [20/0] via 100.0.0.9, 00:39:58
 </code></pre>
 </details>
 
-
-
+Воспользуемся командой <b>traceroute</b> на маршрутизаторе R14 и посмотрим какой путь проходит пакет от источника до IP-адреса назначения 100.0.0.10 (R18.e0/2). 
+</code></pre>
+</details>
+<details>
+<summary>traceroute</summary>
+<pre><code>
+R14#traceroute 100.0.0.10
+Type escape sequence to abort.
+Tracing the route to 100.0.0.10
+VRF info: (vrf in name/id, vrf out name/id)
+  1 100.78.0.1 1 msec 0 msec 0 msec
+  2 100.77.0.1 [AS 101] 1 msec 0 msec 0 msec
+  3 100.0.0.5 [AS 301] 1 msec 0 msec 0 msec
+  4 100.0.0.10 [AS 520] 1 msec *  1 msec
+</code></pre>
+</details>
 
 
 
