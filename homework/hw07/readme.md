@@ -115,6 +115,60 @@ R24(config-router)#neighbor 100.0.0.254 next-hop-self
 R24(config-router)#exit
 ```
 
+Воспользуемся командой <b>show ip bgp summary</b> чтобы посмотреть краткую информацию о состоянии BGP-соединении на маршрутизаторах R23 и R24:
+
+</code></pre>
+</details>
+<details>
+<summary>R23</summary>
+<pre><code>
+R23#sh ip bgp summary
+BGP router identifier 100.0.0.251, local AS number 520
+BGP table version is 20, main routing table version 20
+6 network entries using 840 bytes of memory
+7 path entries using 560 bytes of memory
+3/3 BGP path/bestpath attribute entries using 432 bytes of memory
+1 BGP rrinfo entries using 24 bytes of memory
+1 BGP AS-PATH entries using 24 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 1880 total bytes of memory
+BGP activity 8/2 prefixes, 14/7 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.0.0.2       4          101       2       7       20    0    0 00:00:07        0
+100.0.0.252     4          520      32      29       20    0    0 00:20:43        5
+100.0.0.253     4          520      25      27       20    0    0 00:17:28        0
+100.0.0.254     4          520      27      31       20    0    0 00:18:45        1
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>R24</summary>
+<pre><code>
+R24#sh ip bgp summary
+BGP router identifier 100.0.0.252, local AS number 520
+BGP table version is 16, main routing table version 16
+7 network entries using 980 bytes of memory
+13 path entries using 1040 bytes of memory
+6/4 BGP path/bestpath attribute entries using 864 bytes of memory
+1 BGP rrinfo entries using 24 bytes of memory
+4 BGP AS-PATH entries using 96 bytes of memory
+0 BGP route-map cache entries using 0 bytes of memory
+0 BGP filter-list cache entries using 0 bytes of memory
+BGP using 3004 total bytes of memory
+BGP activity 9/2 prefixes, 17/4 paths, scan interval 60 secs
+
+Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+100.0.0.6       4          301      10      13       16    0    0 00:05:24        4
+100.0.0.10      4         2042      13      14       16    0    0 00:04:41        2
+100.0.0.251     4          520      31      34       16    0    0 00:22:06        4
+100.0.0.253     4          520      65      76       16    0    0 00:55:03        0
+100.0.0.254     4          520      62      67       16    0    0 00:50:19        1
+</code></pre>
+</details>
 
 
 
