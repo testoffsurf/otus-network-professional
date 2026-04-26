@@ -79,8 +79,9 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 </code></pre>
 </details>
 
+Мы видим что у маршрутизатора R15 два соседа и один из них в автономной системе 1001 с IP-адресом 10.77.0.254.
 
-
+<br>
 
 
 
