@@ -82,6 +82,23 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 Мы видим что у маршрутизатора R15 два соседа и один из них в автономной системе 1001 с IP-адресом 10.77.0.254.
 
 ### Настроите iBGP в провайдере Триада, с использованием RR
+Определим маршрутизаторы R23 и R24 как маршрутизаторы с технологией "Route Reflector". Для того чтобы технология "Route Reflector" начала работать на данных маршрутизаторах настроим ее следующими командами:
+```
+R23(config)#router bgp 520
+R23(config-router)#neighbor 100.0.0.252 remote-as 520
+R23(config-router)#neighbor 100.0.0.252 update-source Loopback0
+R23(config-router)#neighbor 100.0.0.252 route-reflector-client
+R23(config-router)#neighbor 100.0.0.252 next-hop-self
+R23(config-router)#neighbor 100.0.0.253 remote-as 520
+R23(config-router)#neighbor 100.0.0.253 update-source Loopback0
+R23(config-router)#neighbor 100.0.0.253 route-reflector-client
+R23(config-router)#neighbor 100.0.0.253 next-hop-self
+R23(config-router)#neighbor 100.0.0.254 remote-as 520
+R23(config-router)#neighbor 100.0.0.254 update-source Loopback0
+R23(config-router)#neighbor 100.0.0.254 route-reflector-client
+R23(config-router)#neighbor 100.0.0.254 next-hop-self
+R23(config-router)#exit
+```
 
 
 
