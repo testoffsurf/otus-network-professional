@@ -17,6 +17,43 @@
 
 <br>
 
+### Настроите iBGP в офисом Москва между маршрутизаторами R14 и R15
+Прямого соединения между маршрутизаторами R14 и R15 у нас нет, но есть соединения через маршрутизаторы R12 и R13 на которых работает алгоритм маршрутизации OSPF и следовательно есть маршруты до Loopback-интерфейсов. iBGP соседство можно построить с помощью Loopback-интерфейсов, для этого сделаем следующие изменения на маршрутизаторах R14 и R15:
+```
+R14(config)#router bgp 1001
+R14(config-router)#neighbor 10.77.0.253 remote-as 1001
+R14(config-router)#neighbor 10.77.0.253 update-source Loopback0
+R14(config-router)#exit
+```
+R15(config)#router bgp 1001
+R15(config-router)#neighbor 10.77.0.254 remote-as 1001
+R15(config-router)#neighbor 10.77.0.254 update-source Loopback0
+R15(config-router)#exit
+
+
+neighbor 10.77.0.253 remote-as 1001
+ neighbor 10.77.0.253 update-source Loopback0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Настройте офис Москва так, чтобы приоритетным провайдером стал Ламас
 
