@@ -29,7 +29,7 @@ R15(config)#router bgp 1001
 R15(config-router)#neighbor 10.77.0.254 remote-as 1001
 R15(config-router)#neighbor 10.77.0.254 update-source Loopback0
 R15(config-router)#exit
-
+```
 
 
 
@@ -67,6 +67,7 @@ R18(config)#router bgp 2042
 R18(config-router)#bgp bestpath as-path multipath-relax
 R18(config-router)#maximum-paths 2
 R18(config-router)#exit
+```
 
 <br>
 
