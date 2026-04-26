@@ -98,6 +98,21 @@ R23(config-router)#neighbor 100.0.0.254 update-source Loopback0
 R23(config-router)#neighbor 100.0.0.254 route-reflector-client
 R23(config-router)#neighbor 100.0.0.254 next-hop-self
 R23(config-router)#exit
+
+R24(config)#router bgp 520
+R24(config-router)#neighbor 100.0.0.251 remote-as 520
+R24(config-router)#neighbor 100.0.0.251 update-source Loopback0
+R24(config-router)#neighbor 100.0.0.251 route-reflector-client
+R24(config-router)#neighbor 100.0.0.251 next-hop-self
+R24(config-router)#neighbor 100.0.0.253 remote-as 520
+R24(config-router)#neighbor 100.0.0.253 update-source Loopback0
+R24(config-router)#neighbor 100.0.0.253 route-reflector-client
+R24(config-router)#neighbor 100.0.0.253 next-hop-self
+R24(config-router)#neighbor 100.0.0.254 remote-as 520
+R24(config-router)#neighbor 100.0.0.254 update-source Loopback0
+R24(config-router)#neighbor 100.0.0.254 route-reflector-client
+R24(config-router)#neighbor 100.0.0.254 next-hop-self
+R24(config-router)#exit
 ```
 
 
