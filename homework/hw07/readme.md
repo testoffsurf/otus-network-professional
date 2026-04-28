@@ -23,11 +23,13 @@
 R14(config)#router bgp 1001
 R14(config-router)#neighbor 10.77.0.253 remote-as 1001
 R14(config-router)#neighbor 10.77.0.253 update-source Loopback0
+R14(config-router)#neighbor 10.77.0.253 next-hop-self
 R14(config-router)#exit
 
 R15(config)#router bgp 1001
 R15(config-router)#neighbor 10.77.0.254 remote-as 1001
 R15(config-router)#neighbor 10.77.0.254 update-source Loopback0
+R15(config-router)#neighbor 10.77.0.254 next-hop-self
 R15(config-router)#exit
 ```
 
