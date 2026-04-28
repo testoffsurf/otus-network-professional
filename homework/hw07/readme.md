@@ -173,7 +173,16 @@ Neighbor        V           AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State
 Мы видим что у маршрутизатора R24 пять соседей: один сосед из автономной системы 301, один сосед из автономной системы 2042 и три соседа из автономной системы 520.
 
 ### Настройте офис Москва так, чтобы приоритетным провайдером стал Ламас
-Для того чтобы в офисе Москва приоритетным провайдером стал Ламас необходимо воспользоваться один из атрибутов BGP, а именно Local Preference. На маршрутизаторе R15 напишем <b>route-map</b> меняющий значение Local Preference - 100 на 150 и данный <b>route-map</b> применим на соответствующего соседа на вход:
+Для того чтобы в офисе Москва приоритетным провайдером стал Ламас, необходимо использовать один из атрибутов BGP, а именно Local Preference. На маршрутизаторе R15 напишем соответствующий <b>route-map</b>, меняющий значение Local Preference со 100 на 150. После чего применим <b>route-map</b> на входящие маршруты от интернет провайдера Ламас:
+```
+R15(config)#route-map SET-LOCAL-PREFERENCE permit 10
+R15(config-route-map)#set local-preference 150
+R15(config-route-map)#exit
+R15(config)#
+R15(config)#router bgp 1001
+R15(config-router)#neighbor 100.77.0.5 route-map SET-LOCAL-PREFERENCE in
+R15(config-router)#exit
+```
 
 
 
