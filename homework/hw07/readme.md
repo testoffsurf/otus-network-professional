@@ -183,7 +183,7 @@ R15(config)#router bgp 1001
 R15(config-router)#neighbor 100.77.0.5 route-map SET-LOCAL-PREFERENCE in
 R15(config-router)#exit
 ```
-
+ 
 
 
 
