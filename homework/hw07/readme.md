@@ -184,13 +184,35 @@ R15(config-router)#neighbor 100.77.0.5 route-map SET-LOCAL-PREFERENCE in
 R15(config-router)#exit
 ```
 
-Посмотрим на маршрутизаторе R15 таблицу маршрутизации до сети 10.78.0.24/30 до применения <b>route-map</b>:
+Посмотрим на маршрутизаторах R14 и R15 таблицу маршрутизации до сети 10.78.0.24/30 до применения <b>route-map</b>:
 </code></pre>
 </details>
 <details>
-<summary>R15 [ до route-map ]</summary>
+<summary>R14</summary>
 <pre><code>
-R15(config)#do sh ip bgp 10.78.0.24
+R14#sh ip bgp 10.78.0.24
+BGP routing table entry for 10.78.0.24/30, version 41
+Paths: (2 available, best #1, table default)
+  Advertised to update-groups:
+     2
+  Refresh Epoch 1
+  101 520 2042
+    100.78.0.1 from 100.78.0.1 (100.78.0.254)
+      Origin incomplete, localpref 100, valid, external, best
+      rx pathid: 0, tx pathid: 0x0
+  Refresh Epoch 3
+  301 520 2042, (received & used)
+    10.77.0.253 (metric 21) from 10.77.0.253 (10.77.0.253)
+      Origin incomplete, metric 0, localpref 100, valid, internal
+      rx pathid: 0, tx pathid: 0
+</code></pre>
+</details>
+</code></pre>
+</details>
+<details>
+<summary>R15</summary>
+<pre><code>
+R15#sh ip bgp 10.78.0.24
 BGP routing table entry for 10.78.0.24/30, version 41
 Paths: (2 available, best #2, table default)
   Advertised to update-groups:
