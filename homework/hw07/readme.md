@@ -183,7 +183,7 @@ R15(config)#router bgp 1001
 R15(config-router)#neighbor 100.77.0.5 route-map SET-LOCAL-PREFERENCE in
 R15(config-router)#exit
 ```
- 
+Посмотрим на маршрутизаторе R15 таблицу маршрутизации до сети 10.78.0.24/30 до применения <b>route-map</b>:
 
 
 
