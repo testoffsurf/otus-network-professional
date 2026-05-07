@@ -229,8 +229,47 @@ Paths: (2 available, best #2, table default)
       rx pathid: 0, tx pathid: 0x0
 </code></pre>
 </details>
-
-
+Мы видим что в зависимости от маршрутизатора самый лучший путь до сети 10.78.0.24/30 меняется. Для маршрутизатора R14 через AS 101, 520, 2042; а для маршрутизатора R15 через AS 301 520 2042.
+Теперь применим ранее описанный <b>route-map</b> на входящие маршруты от интернет провайдера Ламас и посмотрим как у нас измениться картина в отношении наилучшего пути к сети 10.78.0.24/30:
+</code></pre>
+</details>
+<details>
+<summary>R14</summary>
+<pre><code>
+R14#sh ip bgp 10.78.0.24
+BGP routing table entry for 10.78.0.24/30, version 57
+Paths: (2 available, best #2, table default)
+  Advertised to update-groups:
+     1
+  Refresh Epoch 1
+  101 520 2042
+    100.78.0.1 from 100.78.0.1 (100.78.0.254)
+      Origin incomplete, localpref 100, valid, external
+      rx pathid: 0, tx pathid: 0
+  Refresh Epoch 4
+  301 520 2042, (received & used)
+    10.77.0.253 (metric 21) from 10.77.0.253 (10.77.0.253)
+      Origin incomplete, metric 0, localpref 150, valid, internal, best
+      rx pathid: 0, tx pathid: 0x0
+</code></pre>
+</details>
+</code></pre>
+</details>
+<details>
+<summary>R15</summary>
+<pre><code>
+R15#sh ip bgp 10.78.0.24/30
+BGP routing table entry for 10.78.0.24/30, version 59
+Paths: (1 available, best #1, table default)
+  Advertised to update-groups:
+     2
+  Refresh Epoch 3
+  301 520 2042
+    100.77.0.5 from 100.77.0.5 (100.77.0.254)
+      Origin incomplete, localpref 150, valid, external, best
+      rx pathid: 0, tx pathid: 0x0
+</code></pre>
+</details>
 
 
 
