@@ -351,14 +351,15 @@ Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
               x best-external, a additional-path, c RIB-compressed,
 Origin codes: i - IGP, e - EGP, ? - incomplete
 RPKI validation codes: V valid, I invalid, N Not found
-
      Network          Next Hop            Metric LocPrf Weight Path
  *>  0.0.0.0          100.78.0.1                             0 101 i
-
 Total number of prefixes 1
 </code></pre>
 </details>
 
+Теперь то что требовалось.
+
+### Настроить провайдера Ламас так, чтобы в офис Москва отдавался только маршрут по умолчанию и префикс офиса Санкт-Петербург
 
 
 
