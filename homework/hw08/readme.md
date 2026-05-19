@@ -302,7 +302,29 @@ R22(config-router)#neighbor 100.78.0.2 default-originate
 R22(config-router)#exit
 ```
 
+Посмотрим что изменилось после применения, вышеописанного конфигурационного кода:
+<details>
+<summary>R24</summary>
+<pre><code>
+R14#sh ip bgp neighbors 100.78.0.1 received-routes
+BGP table version is 42, local router ID is 10.77.0.254
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
 
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  0.0.0.0          100.78.0.1                             0 101 i
+ &#42;   100.0.0.0/30     100.78.0.1               0             0 101 i
+ &#42;   100.0.0.4/30     100.78.0.1                             0 101 520 i
+ &#42;   100.0.0.8/30     100.78.0.1                             0 101 520 i
+ &#42;   100.0.0.20/30    100.78.0.1                             0 101 520 i
+ &#42;   100.77.0.0/30    100.78.0.1               0             0 101 i
+ &#42;   100.78.0.0/30    100.78.0.1               0             0 101 i
+Total number of prefixes 7
+</code></pre>
+</details>
 
 
 
