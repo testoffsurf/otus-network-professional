@@ -271,7 +271,7 @@ Total number of prefixes 2
 ### Настроить провайдера Киторн так, чтобы в офис Москва отдавался только маршрут по умолчанию.
 Посмотрим какие префиксы отдаются со стороны интернет провайдера Киторн в Московский офис:
 <details>
-<summary>R24</summary>
+<summary>R14</summary>
 <pre><code>
 R14#sh ip bgp neighbors 100.78.0.1 received-routes
 BGP table version is 52, local router ID is 10.77.0.254
@@ -304,7 +304,7 @@ R22(config-router)#exit
 
 Посмотрим что изменилось после применения, вышеописанного конфигурационного кода:
 <details>
-<summary>R24</summary>
+<summary>R14</summary>
 <pre><code>
 R14#sh ip bgp neighbors 100.78.0.1 received-routes
 BGP table version is 42, local router ID is 10.77.0.254
@@ -325,10 +325,39 @@ Total number of prefixes 7
 </code></pre>
 </details>
 
+Мы видим что в таблице появился маршрут по умолчанию и он считается наилучшим, но также мы замечаем в таблице присутствуют и другие маршруты которые не совсем нам кстати. Возьмем и отфильтруем их, чтобы получить то что нам необходимо:
+```
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 10 deny 100.0.0.0/30
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 15 deny 100.0.0.4/30
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 20 deny 100.0.0.8/30
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 25 deny 100.0.0.20/30
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 30 deny 100.77.0.0/30
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 35 deny 100.78.0.0/30
+R22(config)#ip prefix-list KITORNFILTER-TO-MOSCOW seq 40 permit 0.0.0.0/0 le 32
 
+R22(config)#router bgp 101
+R22(config-router)#neighbor 100.78.0.2 prefix-list KITORNFILTER-TO-MOSCOW out
+R22(config-router)#exit
+```
 
+Посмотрим что из этого получилось:
+<details>
+<summary>R14</summary>
+<pre><code>
+R14#sh ip bgp neighbors 100.78.0.1 received-routes
+BGP table version is 44, local router ID is 10.77.0.254
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
 
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  0.0.0.0          100.78.0.1                             0 101 i
 
+Total number of prefixes 1
+</code></pre>
+</details>
 
 
 
