@@ -69,6 +69,42 @@ Total number of prefixes 31
 </code></pre>
 </details>
 
+</code></pre>
+</details>
+<details>
+<summary>R21</summary>
+<pre><code>
+R21#sh ip bgp neighbors 100.77.0.6 received-routes
+BGP table version is 32, local router ID is 100.77.0.254
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  10.77.0.0/30     100.77.0.6              30             0 1001 ?
+ *>  10.77.0.4/30     100.77.0.6              20             0 1001 ?
+ *>  10.77.0.8/30     100.77.0.6              20             0 1001 ?
+ *>  10.77.0.12/30    100.77.0.6               0             0 1001 ?
+ *>  10.77.0.16/30    100.77.0.6               0             0 1001 ?
+ *>  10.77.0.20/30    100.77.0.6               0             0 1001 ?
+ *>  10.77.0.24/30    100.77.0.6              20             0 1001 ?
+ *>  10.77.0.28/30    100.77.0.6              20             0 1001 ?
+ *>  10.77.0.32/30    100.77.0.6              20             0 1001 ?
+ *>  10.77.0.36/30    100.77.0.6              20             0 1001 ?
+ *>  10.77.0.249/32   100.77.0.6              11             0 1001 ?
+ *>  10.77.0.250/32   100.77.0.6              11             0 1001 ?
+ *>  10.77.0.251/32   100.77.0.6              11             0 1001 ?
+ *>  10.77.0.252/32   100.77.0.6              31             0 1001 ?
+ *>  10.77.0.253/32   100.77.0.6               0             0 1001 ?
+ *>  10.77.0.254/32   100.77.0.6              21             0 1001 ?
+ *   100.77.0.4/30    100.77.0.6               0             0 1001 i
+ *>  100.78.0.0/30    100.77.0.6                             0 1001 i
+
+Total number of prefixes 18
+</code></pre>
+</details>
 
 
 
