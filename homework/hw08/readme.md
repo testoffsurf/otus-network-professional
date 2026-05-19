@@ -76,7 +76,6 @@ Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
               x best-external, a additional-path, c RIB-compressed,
 Origin codes: i - IGP, e - EGP, ? - incomplete
 RPKI validation codes: V valid, I invalid, N Not found
-
      Network          Next Hop            Metric LocPrf Weight Path
  *>  10.77.0.0/30     100.77.0.6              30             0 1001 ?
  *>  10.77.0.4/30     100.77.0.6              20             0 1001 ?
