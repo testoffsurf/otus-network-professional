@@ -105,35 +105,54 @@ Total number of prefixes 18
 
 Для того чтобы в офисе Москва не появился транзитный трафик нам необходимо написать регулярное выражение для фильтрации маршрутов на основе списка номеров автономных систем (AS), через которые прошел маршрут:
 
+```
+R14(config)#ip as-path access-list 1 permit ^$
+R14(config)#ip as-path access-list 1 deny .*
+R14(config)#router bgp 1001
+R14(config-router)#neighbor 100.78.0.1 filter-list 1 out
+R14(config-router)#exit
 
+R15(config)#ip as-path access-list 1 permit ^$
+R15(config)#ip as-path access-list 1 deny .*
+R15(config)#router bgp 1001
+R15(config-router)#neighbor 100.77.0.5 filter-list 1 out
+R15(config-router)#exit
+```
 
+Посмотрим что изменилось после применения регулярного выражения:
+<details>
+<summary>R22</summary>
+<pre><code>
+R22#sh ip bgp neighbors 100.78.0.2 received-routes
+BGP table version is 1, local router ID is 100.78.0.254
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+     Network          Next Hop            Metric LocPrf Weight Path
+ &#42;   10.77.0.0/30     100.78.0.2               0             0 1001 ?
+ &#42;   10.77.0.4/30     100.78.0.2               0             0 1001 ?
+ &#42;   10.77.0.8/30     100.78.0.2               0             0 1001 ?
+ &#42;   10.77.0.12/30    100.78.0.2              20             0 1001 ?
+ &#42;   10.77.0.16/30    100.78.0.2              20             0 1001 ?
+ &#42;   10.77.0.20/30    100.78.0.2              30             0 1001 ?
+ &#42;   10.77.0.24/30    100.78.0.2              20             0 1001 ?
+ &#42;   10.77.0.28/30    100.78.0.2              20             0 1001 ?
+ &#42;   10.77.0.32/30    100.78.0.2              20             0 1001 ?
+ &#42;   10.77.0.36/30    100.78.0.2              20             0 1001 ?
+ &#42;   10.77.0.249/32   100.78.0.2              31             0 1001 ?
+ &#42;   10.77.0.250/32   100.78.0.2              11             0 1001 ?
+ &#42;   10.77.0.251/32   100.78.0.2              11             0 1001 ?
+ &#42;   10.77.0.252/32   100.78.0.2              11             0 1001 ?
+ &#42;   10.77.0.253/32   100.78.0.2              21             0 1001 ?
+ &#42;   10.77.0.254/32   100.78.0.2               0             0 1001 ?
+ &#42;   100.77.0.4/30    100.78.0.2                             0 1001 i
+ &#42;   100.78.0.0/30    100.78.0.2               0             0 1001 i
+Total number of prefixes 18
+</code></pre>
+</details>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-к котором использовать  ^$
 
 
 
