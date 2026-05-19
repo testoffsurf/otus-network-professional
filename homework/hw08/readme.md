@@ -60,7 +60,6 @@ RPKI validation codes: V valid, I invalid, N Not found
  &#42;   100.77.0.0/30    100.78.0.2                             0 1001 301 i
  &#42;   100.77.0.4/30    100.78.0.2                             0 1001 i
  &#42;   100.78.0.0/30    100.78.0.2               0             0 1001 i
-
 Total number of prefixes 31
 </code></pre>
 </details>
@@ -94,7 +93,6 @@ RPKI validation codes: V valid, I invalid, N Not found
  *>  10.77.0.254/32   100.77.0.6              21             0 1001 ?
  &#42;   100.77.0.4/30    100.77.0.6               0             0 1001 i
  *>  100.78.0.0/30    100.77.0.6                             0 1001 i
-
 Total number of prefixes 18
 </code></pre>
 </details>
@@ -272,6 +270,39 @@ Total number of prefixes 2
 
 ### Настроить провайдера Киторн так, чтобы в офис Москва отдавался только маршрут по умолчанию.
 Посмотрим какие префиксы отдаются со стороны интернет провайдера Киторн в Московский офис:
+<details>
+<summary>R24</summary>
+<pre><code>
+R14#sh ip bgp neighbors 100.78.0.1 received-routes
+BGP table version is 52, local router ID is 10.77.0.254
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+     Network          Next Hop            Metric LocPrf Weight Path
+ &#42;   100.0.0.0/30     100.78.0.1               0             0 101 i
+ &#42;   100.0.0.4/30     100.78.0.1                             0 101 520 i
+ &#42;   100.0.0.8/30     100.78.0.1                             0 101 520 i
+ &#42;   100.0.0.20/30    100.78.0.1                             0 101 520 i
+ &#42;   100.77.0.0/30    100.78.0.1               0             0 101 i
+ &#42;   100.78.0.0/30    100.78.0.1               0             0 101 i
+Total number of prefixes 6
+</code></pre>
+</details>
+
+И так со стороны интернет провайдера Киторн в Московский офис отдается 6 префиксов.
+
+<br>
+
+Для того чтобы со стороны интернет провайдера Киторн в Московский офис отдавался только маршрут по умолчанию необходимо сконфигурировать маршрутизатор R22 следующим образом:
+```
+R22(config)#router bgp 101
+R22(config-router)#neighbor 100.78.0.2 default-originate
+R22(config-router)#exit
+```
+
+
 
 
 
