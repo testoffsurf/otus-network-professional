@@ -250,10 +250,27 @@ R18(config-router)#neighbor 100.0.0.21 prefix-list SPBFILTER-TO-TRIADA out
 R18(config-router)#exit
 ```
 
+Посмотрим что изменилось после применения префикс-листа:
+<details>
+<summary>R24</summary>
+<pre><code>
+R24#sh ip bgp neighbors 100.0.0.10 received-routes
+BGP table version is 92, local router ID is 100.0.0.252
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+     Network          Next Hop            Metric LocPrf Weight Path
+ &#42;   100.0.0.8/30     100.0.0.10               0             0 2042 i
+ r   100.0.0.20/30    100.0.0.10               0             0 2042 i
+Total number of prefixes 2
+</code></pre>
+</details>
 
+И так в сторону интернет провайдера Траида отдается 2 префикса, вместо 17 ранее.
 
-
-
+### Настроить провайдера Киторн так, чтобы в офис Москва отдавался только маршрут по умолчанию.
 
 
 
