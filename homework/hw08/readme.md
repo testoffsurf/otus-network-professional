@@ -18,9 +18,6 @@
 
 ### Настроить фильтрацию в офисе Москва так, чтобы не появилось транзитного трафика (As-path)
 Посмотрим какие маршруты отдаются в сторону интернет провайдеров Киторн и Ламас из Московского офиса:
-
-</code></pre>
-</details>
 <details>
 <summary>R22</summary>
 <pre><code>
@@ -69,8 +66,6 @@ Total number of prefixes 31
 </code></pre>
 </details>
 
-</code></pre>
-</details>
 <details>
 <summary>R21</summary>
 <pre><code>
