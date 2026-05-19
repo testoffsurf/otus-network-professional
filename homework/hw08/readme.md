@@ -189,6 +189,68 @@ Total number of prefixes 18
 Как видим, число получаемых маршрутизатором R22 маршрутов от маршрутизатора R14 снизилось с 31 до 18.
 
 ### Настроить фильтрацию в офисе С.-Петербург так, чтобы не появилось транзитного трафика (Prefix-list)
+Посмотрим какие префиксы отдаются в сторону интернет провайдера Триада из Санкт-Петербурского офиса:
+<details>
+<summary>R24</summary>
+<pre><code>
+R24#sh ip bgp neighbors 100.0.0.10 received-routes
+BGP table version is 62, local router ID is 100.0.0.252
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+              r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+              x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+     Network          Next Hop            Metric LocPrf Weight Path
+ *>  10.78.0.0/30     100.0.0.10               0             0 2042 ?
+ *>  10.78.0.0/28     100.0.0.10         1536000             0 2042 ?
+ *>  10.78.0.8/30     100.0.0.10         2048000             0 2042 ?
+ *>  10.78.0.12/30    100.0.0.10         2048000             0 2042 ?
+ *>  10.78.0.16/30    100.0.0.10         2048000             0 2042 ?
+ *>  10.78.0.16/28    100.0.0.10         1536000             0 2042 ?
+ *>  10.78.0.20/30    100.0.0.10         2048000             0 2042 ?
+ *>  10.78.0.24/30    100.0.0.10               0             0 2042 ?
+ *>  10.78.0.249/32   100.0.0.10         1536640             0 2042 ?
+ *>  10.78.0.250/32   100.0.0.10         1536640             0 2042 ?
+ *>  10.78.0.251/32   100.0.0.10         1536640             0 2042 ?
+ *>  10.78.0.252/32   100.0.0.10         1024640             0 2042 ?
+ *>  10.78.0.253/32   100.0.0.10         1024640             0 2042 ?
+ *>  10.78.0.254/32   100.0.0.10               0             0 2042 ?
+ *>  10.78.1.0/24     100.0.0.10         1541120             0 2042 ?
+ &#42;   100.0.0.8/30     100.0.0.10               0             0 2042 i
+ r   100.0.0.20/30    100.0.0.10               0             0 2042 i
+Total number of prefixes 17
+</code></pre>
+</details>
+И так в сторону интернет провайдера Триада, Санкт-Петербургский офис отдается 17 префиксов.
+
+<br>
+
+Настроим фильтрацию префиксов через <b>ip prefix-list</b> таким образом чтобы не появился транзитный трафик:
+```
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 10 deny 10.78.0.0/30
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 15 deny 10.78.0.0/28
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 20 deny 10.78.0.8/30
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 25 deny 10.78.0.12/30
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 30 deny 10.78.0.16/30
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 35 deny 10.78.0.16/28
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 40 deny 10.78.0.20/30
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 45 deny 10.78.0.24/30
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 50 deny 10.78.0.249/32
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 55 deny 10.78.0.250/32
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 60 deny 10.78.0.251/32
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 65 deny 10.78.0.252/32
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 70 deny 10.78.0.253/32
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 75 deny 10.78.0.254/32
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 80 deny 10.78.1.0/24
+R18(config)#ip prefix-list SPBFILTER-TO-TRIADA seq 85 permit 0.0.0.0/0 le 32
+
+R18(config)#router bgp 2042
+R18(config-router)#neighbor 100.0.0.9 prefix-list SPBFILTER-TO-TRIADA out
+R18(config-router)#neighbor 100.0.0.21 prefix-list SPBFILTER-TO-TRIADA out
+R18(config-router)#exit
+```
+
+
 
 
 
