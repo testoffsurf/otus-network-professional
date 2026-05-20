@@ -360,48 +360,27 @@ Total number of prefixes 1
 Теперь то что требовалось.
 
 ### Настроить провайдера Ламас так, чтобы в офис Москва отдавался только маршрут по умолчанию и префикс офиса Санкт-Петербург
+Маршрутизатор R21 у интернет провайдера Ламас сконфигурируем следующим образом (чтобы в офис Москва отдавался только маршрут по умолчанию и префикс офиса Санкт-Петербург):
+```
+R21(config)#router bgp 301
+R21(config-router)#neighbor 100.77.0.6 remote-as 1001
+R21(config-router)#neighbor 100.77.0.6 default-originate
+R21(config-router)#neighbor 100.77.0.6 soft-reconfiguration inbound
+R21(config-router)#neighbor 100.77.0.6 route-map LAMAS-TO-MOSCOW out
+R21(config-router)#exit
 
+R21(config)#ip as-path access-list 1 permit _2042$
+R21(config)#ip prefix-list DEF-ORIGINATE seq 10 permit 0.0.0.0/0
 
+R21(config)#route-map LAMAS-TO-MOSCOW permit 10
+R21(config-route-map)#match ip address prefix-list DEF-ORIGINATE
+R21(config-route-map)#exit
 
+R21(config)#route-map LAMAS-TO-MOSCOW permit 20
+R21(config-route-map)#match as-path 1
+R21(config-route-map)#exit
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<br>
 
 Полные файлы изменений приведены [здесь](config/)
