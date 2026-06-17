@@ -9,7 +9,7 @@
   2. Настроите DMVPN Ммжду Москва и Чокурдах, Лабытнанги
 
 ### Топология
-<center><img src="vpn_topologi.png" align="middle"></center>
+<center><img src="dmvpn_topologi.png" align="middle"></center>
 
 <br>
 
