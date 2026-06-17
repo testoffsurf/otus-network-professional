@@ -9,3 +9,7 @@
 7. [Масштабируемость и дизайн iBGP](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw07)
 8. [BGP. Управление анонсами](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw08)
 9. [Использование BGP для маршрутизации IPv6](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw09)
+10. [Основные протоколы сети Интернет](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw10)
+11. [DMVPN #2](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw11)
+12. [MPLS. Основные концепции и сервисы](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw12)
+13. [Сертификаты. Часть 2: практика. TLS/SSL](https://github.com/testoffsurf/otus-network-professional/tree/main/homework/hw13)
