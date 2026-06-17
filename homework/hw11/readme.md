@@ -149,7 +149,7 @@ Interface: Tunnel100, IPv4 NHRP Details
 Type:Hub, NHRP Peers:2,
 
    Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
- ----- --------------- --------------- ----- -------- -----
+ ===== =====================================================
      1 100.0.0.26           172.16.1.1    UP 01:23:17     D
      1 100.0.0.18           172.16.1.2    UP 01:42:21     D
 </code></pre>
