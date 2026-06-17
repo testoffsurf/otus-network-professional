@@ -6,7 +6,7 @@
 
 ## Задание:
   1. Настроите GRE между офисами Москва и Санкт-Петербург
-  2. Настроите DMVPN Ммжду Москва и Чокурдах, Лабытнанги
+  2. Настроите DMVPN между Москва и Чокурдах, Лабытнанги
 
 ### Топология
 <center><img src="dmvpn_topologi.png" align="middle"></center>
@@ -67,7 +67,49 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/3 ms
 
 Мы видим что пинг между туннельными интерфейсами проходит в обе стороны.
 
-### Настроите DMVPN Ммжду Москва и Чокурдах, Лабытнанги
+### Настроите DMVPN между Москва и Чокурдах, Лабытнанги
+Для организации DMVPN между офисом в г. Москва и офисам в Чокурдах, Лабытнанги воспользуемся следующими конфигурационными командами на соответствующих маршрутизаторах R15, R27 и R28. Причем маршрутизатор R15 будет выступать в качестве HUB(а), а маршрутизаторы R27 и R28 в качестве SPOK(-ов).
+
+```
+R15(config)#interface Tunnel100
+R15(config-if)#ip address 172.16.1.254 255.255.255.0
+R15(config-if)#no ip redirects
+R15(config-if)#ip mtu 1400
+R15(config-if)#ip nhrp map multicast dynamic
+R15(config-if)#ip nhrp network-id 100
+R15(config-if)#ip nhrp registration no-unique
+R15(config-if)#ip tcp adjust-mss 1360
+R15(config-if)#ip ospf network broadcast
+R15(config-if)#ip ospf priority 255
+R15(config-if)#keepalive 15 3
+R15(config-if)#tunnel source Ethernet0/2
+R15(config-if)#tunnel mode gre multipoint
+R15(config-if)#tunnel path-mtu-discovery
+R15(config-if)#exit
+```
+
+```
+R28(config)#interface Tunnel100
+R28(config-if)#ip address 172.16.1.1 255.255.255.0
+R28(config-if)#no ip redirects
+R28(config-if)#ip mtu 1400
+R28(config-if)#ip nhrp map 172.16.1.254 100.77.0.6
+R28(config-if)#ip nhrp map multicast 100.77.0.6
+R28(config-if)#ip nhrp network-id 100
+R28(config-if)#ip nhrp nhs 172.16.1.254
+R28(config-if)#ip nhrp registration no-unique
+R28(config-if)#ip tcp adjust-mss 1360
+R28(config-if)#ip ospf network broadcast
+R28(config-if)#ip ospf priority 0
+R28(config-if)#keepalive 15 3
+R28(config-if)#tunnel source Ethernet0/0
+R28(config-if)#tunnel mode gre multipoint
+R28(config-if)#tunnel path-mtu-discovery
+R28(config-if)#exit
+```
+
+```
+```
 
 
 
