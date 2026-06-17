@@ -11,7 +11,6 @@
 ### Топология
 <center><img src="dmvpn_topologi.png" align="middle"></center>
 
-<br>
 
 ### Настроите GRE между офисами Москва и Санкт-Петербург
 
