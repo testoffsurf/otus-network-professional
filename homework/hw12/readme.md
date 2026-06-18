@@ -68,7 +68,22 @@ R13#show mpls ldp neighbor
 <details>
 <summary>show mpls forwarding-table</summary>
 <pre><code>
-  
+R13#show mpls forwarding-table
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop
+Label      Label      or Tunnel Id     Switched      interface
+20         Pop Label  10.77.0.254/32   0             Et0/3      10.77.0.9
+21         Pop Label  10.77.0.253/32   3207          Et0/2      10.77.0.17
+22         Pop Label  172.16.1.0/24    0             Et0/2      10.77.0.17
+23         Pop Label  10.77.0.4/30     0             Et0/3      10.77.0.9
+24         Pop Label  10.77.0.12/30    0             Et0/2      10.77.0.17
+25         24         10.77.0.251/32   0             Et0/3      10.77.0.9
+           21         10.77.0.251/32   0             Et0/2      10.77.0.17
+26         28         10.77.0.28/30    0             Et0/3      10.77.0.9
+           22         10.77.0.28/30    0             Et0/2      10.77.0.17
+27         29         10.77.0.24/30    0             Et0/3      10.77.0.9
+           23         10.77.0.24/30    0             Et0/2      10.77.0.17
+28         Pop Label  10.77.0.20/30    0             Et0/2      10.77.0.17
+29         Pop Label  10.77.0.0/30     0             Et0/3      10.77.0.9
 </code></pre>
 </details>
 
