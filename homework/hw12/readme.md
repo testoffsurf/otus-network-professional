@@ -121,7 +121,10 @@ R17(config-if-range)#exit
 <details>
 <summary>show mpls interfaces</summary>
 <pre><code>
-  
+R18#show mpls interfaces
+Interface              IP            Tunnel   BGP Static Operational
+Ethernet0/0            Yes (ldp)     No       No  No     Yes
+Ethernet0/1            Yes (ldp)     No       No  No     Yes
 </code></pre>
 </details>
 
@@ -130,7 +133,24 @@ R17(config-if-range)#exit
 <details>
 <summary>show mpls ldp neighbor</summary>
 <pre><code>
-  
+R18#show mpls ldp neighbor
+    Peer LDP Ident: 10.78.0.253:0; Local LDP Ident 10.78.0.254:0
+        TCP connection: 10.78.0.253.646 - 10.78.0.254.62138
+        State: Oper; Msgs sent/rcvd: 40/37; Downstream
+        Up time: 00:21:53
+        LDP discovery sources:
+          Ethernet0/1, Src IP addr: 10.78.0.26
+        Addresses bound to peer LDP Ident:
+          10.78.0.21      10.78.0.26      10.78.0.253     10.78.0.17
+    Peer LDP Ident: 10.78.0.252:0; Local LDP Ident 10.78.0.254:0
+        TCP connection: 10.78.0.252.646 - 10.78.0.254.38655
+        State: Oper; Msgs sent/rcvd: 39/38; Downstream
+        Up time: 00:21:51
+        LDP discovery sources:
+          Ethernet0/0, Src IP addr: 10.78.0.2
+        Addresses bound to peer LDP Ident:
+          10.78.0.9       10.78.0.2       10.78.0.252     10.78.0.13
+          10.78.0.5
 </code></pre>
 </details>
 
@@ -139,7 +159,13 @@ R17(config-if-range)#exit
 <details>
 <summary>show mpls forwarding-table</summary>
 <pre><code>
-  
+R18#show mpls forwarding-table
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop
+Label      Label      or Tunnel Id     Switched      interface
+20         Pop Label  10.78.0.253/32   0             Et0/1      10.78.0.26
+21         Pop Label  10.78.0.16/28    0             Et0/1      10.78.0.26
+22         Pop Label  10.78.0.252/32   0             Et0/0      10.78.0.2
+23         Pop Label  10.78.0.0/28     0             Et0/0      10.78.0.2
 </code></pre>
 </details>
 
