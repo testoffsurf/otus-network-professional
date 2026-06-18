@@ -29,7 +29,10 @@ Rxx(config-if-range)#exit
 <details>
 <summary>show mpls interfaces</summary>
 <pre><code>
-  
+R13#show mpls interfaces
+Interface              IP            Tunnel   BGP Static Operational
+Ethernet0/2            Yes (ldp)     No       No  No     Yes
+Ethernet0/3            Yes (ldp)     No       No  No     Yes
 </code></pre>
 </details>
 
@@ -38,7 +41,25 @@ Rxx(config-if-range)#exit
 <details>
 <summary>show mpls ldp neighbor</summary>
 <pre><code>
-  
+R13#show mpls ldp neighbor
+    Peer LDP Ident: 10.77.0.254:0; Local LDP Ident 10.77.0.250:0
+        TCP connection: 10.77.0.254.13050 - 10.77.0.250.646
+        State: Oper; Msgs sent/rcvd: 37/38; Downstream
+        Up time: 00:16:18
+        LDP discovery sources:
+          Ethernet0/3, Src IP addr: 10.77.0.9
+        Addresses bound to peer LDP Ident:
+          10.77.0.5       10.77.0.254     10.77.0.9       100.78.0.2
+          10.77.0.1
+    Peer LDP Ident: 10.77.0.253:0; Local LDP Ident 10.77.0.250:0
+        TCP connection: 10.77.0.253.13232 - 10.77.0.250.646
+        State: Oper; Msgs sent/rcvd: 38/40; Downstream
+        Up time: 00:16:14
+        LDP discovery sources:
+          Ethernet0/2, Src IP addr: 10.77.0.17
+        Addresses bound to peer LDP Ident:
+          10.77.0.17      10.77.0.253     10.77.0.13      100.77.0.6
+          10.77.0.21      172.16.1.254    172.16.0.1
 </code></pre>
 </details>
 
