@@ -159,7 +159,7 @@ R15(config-if)#exit
 ```
 </code></pre>
 </details>
-
+<br>
 </code></pre>
 </details>
 <details>
