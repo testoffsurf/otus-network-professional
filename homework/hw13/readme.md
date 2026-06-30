@@ -29,9 +29,26 @@ R14(cs-server)#no shutdown
 
 Воспользуемся командой <b>show crypto pki server</b> чтобы убедиться что у нас на маршрутизаторе запущен и работает центр сертификации, а также получить информацию о его состоянии и конфигурации.
 
-
-
-
+</code></pre>
+</details>
+<details>
+<summary>show crypto pki server</summary>
+<pre><code>
+R14#show crypto pki server
+Certificate Server R14:
+    Status: enabled
+    State: enabled
+    Server's configuration is locked  (enter "shut" to unlock it)
+    Issuer name: CN=R14, O=laba, C=ru
+    <b>CA cert fingerprint: 3F0B88FA 32299C7F C46A3DA7 2BE08A8E</b>
+    Granting mode is: manual
+    Last certificate issued serial number (hex): 1
+    CA certificate expiration timer: 06:42:59 UTC Jun 29 2029
+    CRL NextUpdate timer: 12:42:59 UTC Jun 30 2026
+    Current primary storage dir: nvram:
+    Database Level: Complete - all issued certs written as <serialnum>.cer
+</code></pre>
+</details>
 
 
 
