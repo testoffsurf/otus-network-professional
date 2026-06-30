@@ -206,6 +206,7 @@ R18(config-if)#exit
 <details>
 <summary>show crypto ipsec sa</summary>
 <pre><code>
+
 ```
 R18#show crypto ipsec sa
 
@@ -256,6 +257,7 @@ interface: Tunnel0
      outbound ah sas:
 
      outbound pcp sas:
+
 ```
 </code></pre>
 </details>
