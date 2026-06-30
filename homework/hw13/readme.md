@@ -25,6 +25,7 @@ R14(config)#crypto pki server R14
 R14(cs-server)#database level complete
 R14(cs-server)#issuer-name CN=R14, O=laba, C=ru
 R14(cs-server)#no shutdown
+R14(cs-server)#exit
 ```
 
 Воспользуемся командой <b>show crypto pki server</b> чтобы убедиться что у нас на маршрутизаторе запущен и работает центр сертификации, а также получить информацию о его состоянии и конфигурации.
@@ -32,7 +33,7 @@ R14(cs-server)#no shutdown
 </code></pre>
 </details>
 <details>
-<summary>R14</summary>
+<summary>show crypto pki server</summary>
 <pre><code>
 R14#show crypto pki server
 Certificate Server R14:
@@ -49,6 +50,67 @@ Certificate Server R14:
     Database Level: Complete - all issued certs written as <serialnum>.cer
 </code></pre>
 </details>
+      
+ И так мы видим, что центр сертификации на R14 запушен и работает.
+
+Теперь нам необходимо получить сертификаты для устройств которые участвуют в обмене информации через IPSec + GRE. Для этого мы на выбранном устройстве ввидем следующие конфигурационные команды:
+
+```
+R15(config)#ip host R14 1.1.1.14
+R15(config)#ip host R14.laba.ru 1.1.1.14
+
+R15(config)#crypto pki trustpoint R14
+R15(ca-trustpoint)#enrollment url http://R14.laba.ru:80
+R15(ca-trustpoint)#serial-number
+R15(ca-trustpoint)#subject-name CN=R15, O=laba, O=ru
+R15(ca-trustpoint)#revocation-check crl
+R15(ca-trustpoint)#exit
+
+R15(config)#crypto pki authenticate R14
+Certificate has the following attributes:
+       <b>Fingerprint MD5: 3F0B88FA 32299C7F C46A3DA7 2BE08A8E</b>
+      Fingerprint SHA1: E21BFD7B 2FBBFB97 A4930A98 E9E65994 5AFD7E6B
+
+% Do you accept this certificate? [yes/no]: y
+Trustpoint CA certificate accepted.
+
+R15(config)#crypto pki enroll R14
+
+R15(config)#
+000031: *Jun 30 2026 09:20:10.643 UTC: CRYPTO_PKI:  Certificate Request Fingerprint MD5: C23F2612 816D4778 F1621211 5B234310
+000032: *Jun 30 2026 09:20:10.643 UTC: CRYPTO_PKI:  Certificate Request Fingerprint SHA1: 44EFEC65 79A6DD30 3FF2A336 7878AC40 9A94E48A
+R15(config)#
+```
+
+Повторяем в центре сертификации появился ли запрос от маршрутизатора R15 на подтверждение сертификата:
+
+</code></pre>
+</details>
+<details>
+<summary>show crypto pki server R14 requests</summary>
+<pre><code>
+```
+R14#show crypto pki server R14 requests
+Enrollment Request Database:
+
+Subordinate CA certificate requests:
+ReqID  State      Fingerprint                      SubjectName
+--------------------------------------------------------------
+
+RA certificate requests:
+ReqID  State      Fingerprint                      SubjectName
+--------------------------------------------------------------
+
+Router certificates requests:
+ReqID  State      Fingerprint                      SubjectName
+--------------------------------------------------------------
+1      pending    C23F2612816D4778F16212115B234310 serialNumber=67109104+hostname=R15,cn=R15,o=laba,o=ru
+```
+</code></pre>
+</details>
+
+
+
 
 
 
