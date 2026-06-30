@@ -105,9 +105,9 @@ Router certificates requests:
 ReqID  State      Fingerprint                      SubjectName
 --------------------------------------------------------------
 1      pending    C23F2612816D4778F16212115B234310 serialNumber=67109104+hostname=R15,cn=R15,o=laba,o=ru
-
+<br>
 R14#crypto pki server R14 grant 1  
-
+<br>
 R14#show crypto pki server R14 certificates
 Serial Issued date              Expire date               Subject Name
 1       06:42:59 UTC Jun 30 2026 06:42:59 UTC Jun 29 2029  cn=R14 o=laba c=ru
@@ -115,9 +115,6 @@ Serial Issued date              Expire date               Subject Name
 ```
 </code></pre>
 </details>
-
-
-
 
 
 
