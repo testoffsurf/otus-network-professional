@@ -159,7 +159,7 @@ R15(config-if)#exit
 ```
 </code></pre>
 </details>
-<br>
+
 </code></pre>
 </details>
 <details>
@@ -200,14 +200,62 @@ R18(config-if)#exit
 </details>
 
 Воспользуемся командой <b>show crypto ipsec sa</b> чтобы посмотреть информацию об IPSec соединении.
-<br>
+
 </code></pre>
 </details>
 <details>
 <summary>show crypto ipsec sa</summary>
 <pre><code>
 ```
-show crypto ipsec sa  
+R18#show crypto ipsec sa
+
+interface: Tunnel0
+    Crypto map tag: Tunnel0-head-0, local addr 100.0.0.10
+
+   protected vrf: (none)
+   local  ident (addr/mask/prot/port): (100.0.0.10/255.255.255.255/47/0)
+   remote ident (addr/mask/prot/port): (100.77.0.6/255.255.255.255/47/0)
+   current_peer 100.77.0.6 port 500
+     PERMIT, flags={origin_is_acl,}
+    #pkts encaps: 5, #pkts encrypt: 5, #pkts digest: 5
+    #pkts decaps: 5, #pkts decrypt: 5, #pkts verify: 5
+    #pkts compressed: 0, #pkts decompressed: 0
+    #pkts not compressed: 0, #pkts compr. failed: 0
+    #pkts not decompressed: 0, #pkts decompress failed: 0
+    #send errors 0, #recv errors 0
+
+     local crypto endpt.: 100.0.0.10, remote crypto endpt.: 100.77.0.6
+     plaintext mtu 1458, path mtu 1500, ip mtu 1500, ip mtu idb Ethernet0/2
+     current outbound spi: 0x588CA388(1485611912)
+     PFS (Y/N): N, DH group: none
+
+     inbound esp sas:
+      spi: 0x28D4E2CF(685040335)
+        transform: esp-aes esp-sha256-hmac ,
+        in use settings ={Transport, }
+        conn id: 3, flow_id: SW:3, sibling_flags 80000000, crypto map: Tunnel0-head-0
+        sa timing: remaining key lifetime (k/sec): (4147778/2727)
+        IV size: 16 bytes
+        replay detection support: Y
+        Status: ACTIVE(ACTIVE)
+
+     inbound ah sas:
+
+     inbound pcp sas:
+
+     outbound esp sas:
+      spi: 0x588CA388(1485611912)
+        transform: esp-aes esp-sha256-hmac ,
+        in use settings ={Transport, }
+        conn id: 4, flow_id: SW:4, sibling_flags 80000000, crypto map: Tunnel0-head-0
+        sa timing: remaining key lifetime (k/sec): (4147778/2727)
+        IV size: 16 bytes
+        replay detection support: Y
+        Status: ACTIVE(ACTIVE)
+
+     outbound ah sas:
+
+     outbound pcp sas:
 ```
 </code></pre>
 </details>
