@@ -199,7 +199,18 @@ R18(config-if)#exit
 </code></pre>
 </details>
 
-
+Воспользуемся командой <b>show crypto ipsec sa</b> чтобы посмотреть информацию об IPSec соединении.
+<br>
+</code></pre>
+</details>
+<details>
+<summary>show crypto ipsec sa</summary>
+<pre><code>
+```
+show crypto ipsec sa  
+```
+</code></pre>
+</details>
 
 
 
