@@ -32,7 +32,7 @@ R14(cs-server)#no shutdown
 </code></pre>
 </details>
 <details>
-<summary>show crypto pki server</summary>
+<summary>R14</summary>
 <pre><code>
 R14#show crypto pki server
 Certificate Server R14:
