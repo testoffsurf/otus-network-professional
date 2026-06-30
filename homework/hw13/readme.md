@@ -119,6 +119,50 @@ Serial Issued date              Expire date               Subject Name
 </details>
 
 ### Настроите GRE поверх IPSec между офисами Москва и Санкт-Петербург
+Для того чтобы настроить GRE-туннель поверх IPSec между офисами Москва и Санкт-Петербург, воспользуемся следующими конфигурационными командами:
+
+</code></pre>
+</details>
+<details>
+<summary>R15</summary>
+<pre><code>
+```
+R15(config)#crypto ikev2 proposal LABA-PROPOSAL
+R15(config-ikev2-proposal)#encryption aes-cbc-256
+R15(config-ikev2-proposal)#integrity sha256
+R15(config-ikev2-proposal)#group 19
+R15(config-ikev2-proposal)#exit
+
+R15(config)#crypto ikev2 policy LABA-POLICY
+R15(config-ikev2-policy)#proposal LABA-PROPOSAL
+R15(config-ikev2-policy)#exit
+
+R15(config)#crypto ikev2 profile LABA-PROFILE
+R15(config-ikev2-profile)#match identity remote address 0.0.0.0
+R15(config-ikev2-profile)#authentication remote rsa-sig
+R15(config-ikev2-profile)#authentication local rsa-sig
+R15(config-ikev2-profile)#pki trustpoint R14
+R15(config-ikev2-profile)#exit
+
+R15(config)#crypto ipsec transform-set LABA-TS esp-aes esp-sha256-hmac
+R15(cfg-crypto-trans)#mode transport
+R15(cfg-crypto-trans)#exit
+
+R15(config)#crypto ipsec profile LABA-IPSEC-PROFILE
+R15(ipsec-profile)#set transform-set LABA-TS
+R15(ipsec-profile)#set ikev2-profile LABA-PROFILE
+R15(ipsec-profile)#exit
+
+R15(config)#interface tunnel 0
+R15(config-if)#tunnel protection ipsec profile LABA-IPSEC-PROFILE
+R15(config-if)#exit
+```
+</code></pre>
+</details>
+
+
+
+
 
 
 
