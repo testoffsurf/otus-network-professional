@@ -262,7 +262,20 @@ interface: Tunnel0
 </code></pre>
 </details>
 
-
+</code></pre>
+</details>
+<details>
+<summary>ping</summary>
+<pre><code>
+```
+R18#ping 10.77.0.253
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 10.77.0.253, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/2 ms
+```
+</code></pre>
+</details>
 
 
 ### Настроите DMVPN поверх IPSec между Москва и Чокурдах, Лабытнанги
