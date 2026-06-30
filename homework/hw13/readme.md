@@ -87,7 +87,7 @@ R15(config)#
 </code></pre>
 </details>
 <details>
-<summary>show crypto pki server R14 requests</summary>
+<summary>R14</summary>
 <pre><code>
 ```
 R14#show crypto pki server R14 requests
@@ -105,9 +105,21 @@ Router certificates requests:
 ReqID  State      Fingerprint                      SubjectName
 --------------------------------------------------------------
 1      pending    C23F2612816D4778F16212115B234310 serialNumber=67109104+hostname=R15,cn=R15,o=laba,o=ru
+
+R14#crypto pki server R14 grant 1  
+
+R14#show crypto pki server R14 certificates
+Serial Issued date              Expire date               Subject Name
+1       06:42:59 UTC Jun 30 2026 06:42:59 UTC Jun 29 2029  cn=R14 o=laba c=ru
+2       10:13:01 UTC Jun 30 2026 10:13:01 UTC Jun 30 2027  serialNumber=67109104+hostname=R15 cn=R15 o=laba o=ru
 ```
 </code></pre>
 </details>
+
+
+
+
+
 
 
 
