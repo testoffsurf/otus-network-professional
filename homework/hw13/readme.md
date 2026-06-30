@@ -7,13 +7,30 @@
 ## Задание:
   1. Настроите GRE поверх IPSec между офисами Москва и Санкт-Петербург
   2. Настроите DMVPN поверх IPSec между Москва и Чокурдах, Лабытнанги <br>
-  Дополнительно: Для IPSec использовать CA и сертификаты   
+  Дополнительно: Для IPSec использовать CA и сертификаты
 
 ### Топология
 <center><img src="crt.png" align="middle"></center>
 
 
 ### Настроите GRE поверх IPSec между офисами Москва и Санкт-Петербург
+В качестве сервера сертификации выберем маршрутизатор R14 в Московсом офисе. Воспользуемся следующими конфигурационными командами чтобы активировать сервер сертификации на маршрутизаторе R14:
+
+```
+R14(config)#ip domain name laba.ru
+R14(config)#ip http server
+R14(config)#crypto key generate rsa general-keys label R14 exportable modulus 2048
+
+R14(config)#crypto pki server R14
+R14(cs-server)#database level complete
+R14(cs-server)#issuer-name CN=R14, O=laba, C=ru
+R14(cs-server)#no shutdown
+```
+
+Воспользуемся командой <b>show crypto pki server</b> чтобы убедиться что у нас на маршрутизаторе запущен и работает центр сертификации, а также получить информацию о его состоянии и конфигурации.
+
+
+
 
 
 
