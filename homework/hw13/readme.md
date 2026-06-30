@@ -132,27 +132,27 @@ R15(config-ikev2-proposal)#encryption aes-cbc-256
 R15(config-ikev2-proposal)#integrity sha256
 R15(config-ikev2-proposal)#group 19
 R15(config-ikev2-proposal)#exit
-
+<br>
 R15(config)#crypto ikev2 policy LABA-POLICY
 R15(config-ikev2-policy)#proposal LABA-PROPOSAL
 R15(config-ikev2-policy)#exit
-
+<br>
 R15(config)#crypto ikev2 profile LABA-PROFILE
 R15(config-ikev2-profile)#match identity remote address 0.0.0.0
 R15(config-ikev2-profile)#authentication remote rsa-sig
 R15(config-ikev2-profile)#authentication local rsa-sig
 R15(config-ikev2-profile)#pki trustpoint R14
 R15(config-ikev2-profile)#exit
-
+<br>
 R15(config)#crypto ipsec transform-set LABA-TS esp-aes esp-sha256-hmac
 R15(cfg-crypto-trans)#mode transport
 R15(cfg-crypto-trans)#exit
-
+<br>
 R15(config)#crypto ipsec profile LABA-IPSEC-PROFILE
 R15(ipsec-profile)#set transform-set LABA-TS
 R15(ipsec-profile)#set ikev2-profile LABA-PROFILE
 R15(ipsec-profile)#exit
-
+<br>
 R15(config)#interface tunnel 0
 R15(config-if)#tunnel protection ipsec profile LABA-IPSEC-PROFILE
 R15(config-if)#exit
