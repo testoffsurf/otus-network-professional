@@ -223,7 +223,7 @@ interface: Tunnel0
     #pkts not compressed: 0, #pkts compr. failed: 0
     #pkts not decompressed: 0, #pkts decompress failed: 0
     #send errors 0, #recv errors 0
-
+    
      local crypto endpt.: 100.0.0.10, remote crypto endpt.: 100.77.0.6
      plaintext mtu 1458, path mtu 1500, ip mtu 1500, ip mtu idb Ethernet0/2
      current outbound spi: 0x588CA388(1485611912)
@@ -238,7 +238,7 @@ interface: Tunnel0
         IV size: 16 bytes
         replay detection support: Y
         Status: ACTIVE(ACTIVE)
-
+        
      inbound ah sas:
 
      inbound pcp sas:
