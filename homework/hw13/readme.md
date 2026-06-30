@@ -76,6 +76,8 @@ Trustpoint CA certificate accepted.
 
 R15(config)#crypto pki enroll R14
 
+<b>.....</b>
+
 R15(config)#
 000031: *Jun 30 2026 09:20:10.643 UTC: CRYPTO_PKI:  Certificate Request Fingerprint MD5: C23F2612 816D4778 F1621211 5B234310
 000032: *Jun 30 2026 09:20:10.643 UTC: CRYPTO_PKI:  Certificate Request Fingerprint SHA1: 44EFEC65 79A6DD30 3FF2A336 7878AC40 9A94E48A
@@ -115,13 +117,6 @@ Serial Issued date              Expire date               Subject Name
 ```
 </code></pre>
 </details>
-
-
-
-
-
-
-
 
 ### Настроите GRE поверх IPSec между офисами Москва и Санкт-Петербург
 
