@@ -92,15 +92,15 @@ R15(config)#
 ```
 R14#show crypto pki server R14 requests
 Enrollment Request Database:
-
+<br>
 Subordinate CA certificate requests:
 ReqID  State      Fingerprint                      SubjectName
 --------------------------------------------------------------
-
+<br>
 RA certificate requests:
 ReqID  State      Fingerprint                      SubjectName
 --------------------------------------------------------------
-
+<br>
 Router certificates requests:
 ReqID  State      Fingerprint                      SubjectName
 --------------------------------------------------------------
