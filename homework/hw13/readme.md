@@ -160,6 +160,49 @@ R15(config-if)#exit
 </code></pre>
 </details>
 
+</code></pre>
+</details>
+<details>
+<summary>R18</summary>
+<pre><code>
+```
+R18(config)#crypto ikev2 proposal LABA-PROPOSAL
+R18(config-ikev2-proposal)#encryption aes-cbc-256
+R18(config-ikev2-proposal)#integrity sha256
+R18(config-ikev2-proposal)#group 19
+R18(config-ikev2-proposal)#exit
+<br>
+R18(config)#crypto ikev2 policy LABA-POLICY
+R18(config-ikev2-policy)#proposal LABA-PROPOSAL
+R18(config-ikev2-policy)#exit
+<br>
+R18(config)#crypto ikev2 profile LABA-PROFILE
+R18(config-ikev2-profile)#match identity remote address 0.0.0.0
+R18(config-ikev2-profile)#authentication remote rsa-sig
+R18(config-ikev2-profile)#authentication local rsa-sig
+R18(config-ikev2-profile)#pki trustpoint R14
+R18(config-ikev2-profile)#exit
+<br>
+R18(config)#crypto ipsec transform-set LABA-TS esp-aes esp-sha256-hmac
+R18(cfg-crypto-trans)#mode transport
+R18(cfg-crypto-trans)#exit
+<br>
+R18(config)#crypto ipsec profile LABA-IPSEC-PROFILE
+R18(ipsec-profile)#set transform-set LABA-TS
+R18(ipsec-profile)#set ikev2-profile LABA-PROFILE
+R18(ipsec-profile)#exit
+<br>
+R18(config)#interface tunnel 0
+R18(config-if)#tunnel protection ipsec profile LABA-IPSEC-PROFILE
+R18(config-if)#exit
+```
+</code></pre>
+</details>
+
+
+
+
+
 
 ### Настроите DMVPN поверх IPSec между Москва и Чокурдах, Лабытнанги
 
