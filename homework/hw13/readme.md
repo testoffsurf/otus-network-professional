@@ -10,7 +10,7 @@
   Дополнительно: Для IPSec использовать CA и сертификаты
 
 ### Топология
-<center><img src="crt.png" align="middle"></center>
+<center><img src="ca_gre_dmvpn.png" align="middle"></center>
 
 
 ### Сервер сертификации и сертификаты
