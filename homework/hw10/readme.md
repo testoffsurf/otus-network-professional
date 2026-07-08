@@ -185,9 +185,7 @@ icmp 2.2.2.2:2         10.77.0.22:2       100.77.0.254:2     100.77.0.254:2
 <details>
 <summary>R15</summary>
 <pre><code>
-```
-ip nat inside source static tcp 10.77.0.252 22 3.3.3.3 22 extendable
-```
+R15(config)#ip nat inside source static tcp 10.77.0.252 22 3.3.3.3 22 extendable
 </code></pre>
 </details>
 
@@ -196,7 +194,6 @@ ip nat inside source static tcp 10.77.0.252 22 3.3.3.3 22 extendable
 <details>
 <summary>R19</summary>
 <pre><code>
-```
 R19(config)#ip domain-name laba.ru
 R19(config)#crypto key generate rsa label SSH-RemoteControl-KeyPair modulus 2048
 
@@ -223,7 +220,6 @@ R19(config-line)# login local
 R19(config-line)# transport input ssh
 R19(config-line)# transport output ssh
 R19(config-line)#exit
-```
 </code></pre>
 </details>
 
