@@ -275,7 +275,7 @@ R19(config)#ntp server 10.77.0.250 source Loopback0
 R19(config)#ntp server 10.77.0.251 prefer source Loopback0
 ```
 
-а коммутаторы, сконфигурируем следующим образом:
+а коммутаторы, сконфигурируем вот так:
 ```
 ntp logging
 ntp update-calendar
