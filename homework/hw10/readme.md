@@ -144,6 +144,39 @@ Queued Packets: 0
 </code></pre>
 </details>
 
+### Настроите статический NAT для R20
+Для того чтобы настроить статический NAT для маршрутизатора R20 воспользоваться следующими конфигурационными командами:
+
+```
+R15(config)#ip nat inside source static 10.77.0.22 2.2.2.2
+```
+
+Воспользуемся командами <b>ping</b> и <b>show ip nat translations</b> чтобы убедиться что у нас работает трансляция:
+
+</code></pre>
+</details>
+<details>
+<summary>ping</summary>
+<pre><code>
+R21#ping 2.2.2.2 source lo0
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 2.2.2.2, timeout is 2 seconds:
+Packet sent with a source address of 100.77.0.254
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>show ip nat translations icmp</summary>
+<pre><code>
+R15#sh ip nat translations icmp
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 2.2.2.2:2         10.77.0.22:2       100.77.0.254:2     100.77.0.254:2
+</code></pre>
+</details>
 
 
 <br>
