@@ -307,6 +307,10 @@ SW4(config)#ip dhcp snooping information option allow-untrusted
 SW4(config)#no ip dhcp snooping information option
 SW4(config)#ip dhcp snooping
 
+SW4(config)#interface Ethernet0/0
+SW4(config-if)#ip dhcp snooping trust
+SW4(config-if)#exit
+
 SW4(config)#interface Vlan10
 SW4(config-if)#ip dhcp relay information trusted
 SW4(config-if)#ip helper-address 10.77.0.251
@@ -321,8 +325,28 @@ SW4(config-if)#exit
 </code></pre>
 </details>
 
+</code></pre>
+</details>
+<details>
+<summary>SW2</summary>
+<pre><code>
+SW2(config)#ip dhcp relay information trust-all
 
+SW2(config)#ip dhcp snooping vlan 10,20
+SW2(config)#no ip dhcp snooping information option
+SW2(config)#ip dhcp snooping
 
+SW2(config)#interface Ethernet0/0
+SW2(config-if)#description === Link: Trunk ===
+SW2(config-if)#ip dhcp snooping trust
+SW2(config-if)#exit
+
+SW2(config)#interface Ethernet0/2
+SW2(config-if)#description === Link: PC ===
+SW2(config-if)#ip dhcp snooping limit rate 100
+SW2(config-if)#exit
+</code></pre>
+</details>
 
 Чтобы убедиться что у нас рабочие станции получают IP-адреса с DHCP-сервера, воспользуемся командой <b>show ip dhcp binding</b>:
 
