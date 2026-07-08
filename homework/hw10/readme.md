@@ -15,15 +15,64 @@
   7. Настроите NTP сервер на R12 и R13. Все устройства в офисе Москва должны синхронизировать время с R12 и R13.
 
 ### Топология
-<center><img src="topologi.png" align="middle"></center>
+<center><img src="inet_service.png" align="middle"></center>
 
 <br>
 
 ### Настроите NAT(PAT) на R14 и R15. Трансляция должна осуществляться в адрес автономной системы AS1001
+Для того чтобы настроить NAT(PAT) на маршрутизаторах R14 и R15, воспользуемся следующими конфигурационными командами:
 
+```
+R15(config)#int e0/1
+R15(config-if)#ip nat inside
+R15(config-if)#exit
 
+R15(config)#int e0/0
+R15(config-if)#ip nat inside
+R15(config-if)#exit
 
+R15(config)#int e0/3
+R15(config-if)#ip nat inside
+R15(config-if)#exit
 
+R15(config)#int e0/2
+R15(config-if)#ip nat outside
+R15(config-if)#exit
+
+R15(config)#access-list 10 permit host 1.1.1.14
+R15(config)#access-list 10 permit host 1.1.1.15
+R15(config)#access-list 10 permit 10.77.1.0 0.0.0.127
+R15(config)#access-list 10 permit 10.77.1.128 0.0.0.127
+
+R15(config)#ip nat inside source list 10 interface Ethernet0/2 overload
+```
+
+Воспользуемся командами <b>ping</b> и <b>show ip nat translations</b> чтобы убедиться что у нас работает трансляция:
+
+</code></pre>
+</details>
+<details>
+<summary>ping</summary>
+<pre><code>
+R15#ping 100.77.0.5 source loopback1
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 100.77.0.5, timeout is 2 seconds:
+Packet sent with a source address of 1.1.1.15
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>show ip nat translations</summary>
+<pre><code>
+R15#sh ip nat translations
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 100.77.0.6:1      1.1.1.15:1         100.77.0.5:1       100.77.0.5:1
+</code></pre>
+</details>
 
 
 
