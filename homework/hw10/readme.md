@@ -178,6 +178,89 @@ icmp 2.2.2.2:2         10.77.0.22:2       100.77.0.254:2     100.77.0.254:2
 </details>
 
 ### Настроите NAT так, чтобы R19 был доступен с любого узла для удаленного управления
+Для того чтобы маршрутизатор R19 был доступен с любого узла для удаленного управления, нам необходимо воспользоваться следующими конфигурационными командами:
+
+</code></pre>
+</details>
+<details>
+<summary>R15</summary>
+<pre><code>
+```
+ip nat inside source static tcp 10.77.0.252 22 3.3.3.3 22 extendable
+```
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>R19</summary>
+<pre><code>
+```
+R19(config)#ip domain-name laba.ru
+R19(config)#crypto key generate rsa label SSH-RemoteControl-KeyPair modulus 2048
+
+R19(config)#ip ssh maxstartups 3
+R19(config)#ip ssh time-out 60
+R19(config)#ip ssh authentication-retries 5
+R19(config)#ip ssh rsa keypair-name SSH-RemoteControl-KeyPair
+R19(config)#ip ssh logging events
+R19(config)#ip ssh version 2
+R19(config)#ip ssh dh min size 2048
+R19(config)#ip ssh server algorithm mac hmac-sha1
+R19(config)#ip ssh server algorithm encryption aes256-ctr  aes192-ctr
+R19(config)#ip ssh client algorithm mac hmac-sha1
+R19(config)#ip ssh client algorithm encryption aes256-ctr aes192-ctr
+
+R19(config)#username superuser privilege 15 algorithm-type sha256 secret cisco
+R19(config)#enable algorithm-type sha256 secret cisco
+
+R19(config)#line vty 0 4
+R19(config-line)# exec-timeout 15 0
+R19(config-line)# privilege level 15
+R19(config-line)# logging synchronous
+R19(config-line)# login local
+R19(config-line)# transport input ssh
+R19(config-line)# transport output ssh
+R19(config-line)#exit
+```
+</code></pre>
+</details>
+
+Чтобы убедиться что у нас появилась возможность удаленно управлять маршрутизатором R19, воспользуемся командами <b>ssh</b> и <b>show users</b>:
+
+</code></pre>
+</details>
+<details>
+<summary>ssh</summary>
+<pre><code>
+R21#ssh -l superuser 3.3.3.3
+Password:
+
+R19#
+[Connection to 3.3.3.3 closed by foreign host]
+R21#
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>show users</summary>
+<pre><code>
+R19#sh users
+    Line       User       Host(s)              Idle       Location
+*  0 con 0                idle                 00:00:00
+   2 vty 0     superuser  idle                 00:12:08 100.77.0.5
+<br>
+  Interface    User               Mode         Idle     Peer Address
+</code></pre>
+</details>
+
+
+
+
+
 
 
 
