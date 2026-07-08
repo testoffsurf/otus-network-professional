@@ -254,8 +254,67 @@ R19#sh users
 </details>
 
 ### Настроите для IPv4 DHCP сервер в офисе Москва на маршрутизаторах R12 и R13. VPC1 и VPC7 должны получать сетевые настройки по DHCP
+Для того чтобы маршрутизаторы R12 и R13 задействовали свой функционал в части касаемо DHCP-сервера, произведем их конфигурирование следующим образом:
+
+</code></pre>
+</details>
+<details>
+<summary>R12</summary>
+<pre><code>
+R12(config)#ip dhcp excluded-address 10.77.1.1
+R12(config)#ip dhcp excluded-address 10.77.1.2
+R12(config)#ip dhcp excluded-address 10.77.1.3
+R12(config)#ip dhcp excluded-address 10.77.1.129
+R12(config)#ip dhcp excluded-address 10.77.1.130
+R12(config)#ip dhcp excluded-address 10.77.1.131
+R12(config)#ip dhcp ping packets 7
+R12(config)#ip dhcp ping timeout 300
+
+R12(config)#ip dhcp pool vlan10
+R12(dhcp-config)#network 10.77.1.0 255.255.255.128
+R12(dhcp-config)#default-router 10.77.1.1
+R12(dhcp-config)#domain-name laba.ru
+R12(dhcp-config)#option 4 ip 10.77.0.251
+R12(dhcp-config)#option 42 ip 10.77.0.251
+R12(dhcp-config)#lease 7
+R12(dhcp-config)#update arp
+R12(dhcp-config)#exit
+
+R12(dhcp-config)#ip dhcp pool vlan20
+R12(dhcp-config)#network 10.77.1.128 255.255.255.128
+R12(dhcp-config)#default-router 10.77.1.129
+R12(dhcp-config)#domain-name laba.ru
+R12(dhcp-config)#option 4 ip 10.77.0.251
+R12(dhcp-config)#option 42 ip 10.77.0.251
+R12(dhcp-config)#lease 7
+R12(dhcp-config)#update arp
+R12(dhcp-config)#exit
+</code></pre>
+</details>
 
 
+
+
+
+
+
+
+
+Чтобы убедиться что у нас рабочие станции получают IP-адреса с DHCP-сервера, воспользуемся командой <b>show ip dhcp binding</b>:
+
+</code></pre>
+</details>
+<details>
+<summary>show ip dhcp binding</summary>
+<pre><code>
+R12#sh ip dhcp binding
+Bindings from all pools not associated with VRF:
+IP address          Client-ID/              Lease expiration        Type
+                    Hardware address/
+                    User name
+10.77.1.4           0100.5079.6668.1e       Jul 15 2026 01:32 PM    Automatic
+</code></pre>
+</details>
 
 ### Настроите NTP сервер на R12 и R13. Все устройства в офисе Москва должны синхронизировать время с R12 и R13
 Для того чтобы настроить NTP-сервер на маршрутизаторах R12 и R13 воспользуемся следующими конфигурационными командами:
