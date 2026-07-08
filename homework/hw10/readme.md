@@ -253,7 +253,42 @@ R19#sh users
 </code></pre>
 </details>
 
-### Настроите для IPv4 DHCP сервер в офисе Москва на маршрутизаторах R12 и R13. VPC1 и VPC7 должны получать сетевые настройки по DHCP.
+### Настроите для IPv4 DHCP сервер в офисе Москва на маршрутизаторах R12 и R13. VPC1 и VPC7 должны получать сетевые настройки по DHCP
+
+
+
+### Настроите NTP сервер на R12 и R13. Все устройства в офисе Москва должны синхронизировать время с R12 и R13
+Для того чтобы настроить NTP-сервер на маршрутизаторах R12 и R13 воспользуемся следующими конфигурационными командами:
+
+```
+R12(config)#ntp source Loopback0
+R12(config)#ntp master 3
+R12(config)#ntp update-calendar
+```
+
+Для того чтобы устройства получали время с NTP-сервера необходимо маршрутизаторы сконфигурировать следующим образом: 
+
+```
+R19(config)#ntp logging
+R19(config)#ntp update-calendar
+R19(config)#ntp server 10.77.0.250 source Loopback0
+R19(config)#ntp server 10.77.0.251 prefer source Loopback0
+```
+
+а коммутаторы, сконфигурируем следующим образом:
+```
+ntp logging
+ntp update-calendar
+ntp server 10.77.0.250 source Vlan999
+ntp server 10.77.0.251 prefer source Vlan999
+```
+
+
+
+
+
+
+
 
 
 
