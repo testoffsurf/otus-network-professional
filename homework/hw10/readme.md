@@ -283,17 +283,33 @@ ntp server 10.77.0.250 source Vlan999
 ntp server 10.77.0.251 prefer source Vlan999
 ```
 
+Чтобы убедиться что у нас устройства обновляют время, воспользуемся командами <b>show ntp associations</b> и <b>show ntp packets</b>:
 
+</code></pre>
+</details>
+<details>
+<summary>show ntp associations</summary>
+<pre><code>
+R19#show ntp associations
+  address         ref clock       st   when   poll reach  delay  offset   disp
++~10.77.0.250     127.127.1.1      3    340    512   377  1.000  -0.500  2.078
+*~10.77.0.251     127.127.1.1      3    166    512   377  0.000   0.000  2.061
+ * sys.peer, # selected, + candidate, - outlyer, x falseticker, ~ configured
+</code></pre>
+</details>
 
-
-
-
-
-
-
-
-
-
+</code></pre>
+</details>
+<details>
+<summary>show ntp packets</summary>
+<pre><code>
+R19#show ntp packets
+Ntp In packets                  :  169
+Ntp Out packets                 :  169
+Ntp bad version packets         :  0
+Ntp protocol error packets      :  0
+</code></pre>
+</details>
 
 <br>
 
