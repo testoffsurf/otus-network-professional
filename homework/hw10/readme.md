@@ -269,7 +269,7 @@ R12(config)#ip dhcp excluded-address 10.77.1.130
 R12(config)#ip dhcp excluded-address 10.77.1.131
 R12(config)#ip dhcp ping packets 7
 R12(config)#ip dhcp ping timeout 300
-
+<br>
 R12(config)#ip dhcp pool vlan10
 R12(dhcp-config)#network 10.77.1.0 255.255.255.128
 R12(dhcp-config)#default-router 10.77.1.1
@@ -279,7 +279,7 @@ R12(dhcp-config)#option 42 ip 10.77.0.251
 R12(dhcp-config)#lease 7
 R12(dhcp-config)#update arp
 R12(dhcp-config)#exit
-
+<br>
 R12(dhcp-config)#ip dhcp pool vlan20
 R12(dhcp-config)#network 10.77.1.128 255.255.255.128
 R12(dhcp-config)#default-router 10.77.1.129
@@ -292,10 +292,34 @@ R12(dhcp-config)#exit
 </code></pre>
 </details>
 
+ниже стоящие коммутаторы, необходимо сконфигурировать так:
 
+</code></pre>
+</details>
+<details>
+<summary>SW4</summary>
+<pre><code>
+SW4(config)#ip dhcp relay information trust-all
+SW4(config)#no ip dhcp ping packets
 
+SW4(config)#ip dhcp snooping vlan 10,20
+SW4(config)#ip dhcp snooping information option allow-untrusted
+SW4(config)#no ip dhcp snooping information option
+SW4(config)#ip dhcp snooping
 
+SW4(config)#interface Vlan10
+SW4(config-if)#ip dhcp relay information trusted
+SW4(config-if)#ip helper-address 10.77.0.251
+SW4(config-if)#ip helper-address 10.77.0.250
+SW4(config-if)#exit
 
+SW4(config)#interface Vlan20
+SW4(config-if)#ip dhcp relay information trusted
+SW4(config-if)#ip helper-address 10.77.0.251
+SW4(config-if)#ip helper-address 10.77.0.250
+SW4(config-if)#exit
+</code></pre>
+</details>
 
 
 
@@ -307,7 +331,7 @@ R12(dhcp-config)#exit
 <details>
 <summary>show ip dhcp binding</summary>
 <pre><code>
-R12#sh ip dhcp binding
+R12#show ip dhcp binding
 Bindings from all pools not associated with VRF:
 IP address          Client-ID/              Lease expiration        Type
                     Hardware address/
