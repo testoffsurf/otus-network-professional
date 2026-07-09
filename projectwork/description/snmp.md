@@ -1,12 +1,16 @@
 ### SNMP (Simple Network Management Protocol)
 
 ### Схема иерархии SNMP
-[](../picture/snmp-concept.png)
+![](../picture/snmp-concept.png)
 
 
 
 
 
+
+<br>
+<br>
+<br>
 
 
 
