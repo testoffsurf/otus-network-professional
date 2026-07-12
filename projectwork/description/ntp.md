@@ -14,7 +14,7 @@
 
 
 
-'''
+```
 ntp logging
 ntp source Port-channel1.998
 ntp access-group peer NTP-NtpServerSourcePeers-ACL kod
@@ -24,7 +24,36 @@ ntp server 194.190.168.1 prefer source GigabitEthernet0/0/1
 ntp server 88.147.254.235 source GigabitEthernet0/0/1
 ntp server 88.147.254.227 source GigabitEthernet0/0/1
 ntp server 88.147.254.229 source GigabitEthernet0/0/1
-'''
+```
+
+```
+ip access-list extended NTP-NtpClientsDestinationPeers-ACL
+ remark ===[ Allow access to the internal NTP server from the subnet: 10.77.5.0 - 10.77.5.255 ]=== 
+ permit udp 10.77.5.0 0.0.0.255 host 10.77.5.1 eq ntp
+ remark ===[ Allow access to the internal NTP server from the subnet: 10.77.6.0 - 10.77.6.255 ]===
+ permit udp 10.77.6.0 0.0.0.255 host 10.77.5.1 eq ntp
+ remark ===[ Allow access to the internal NTP server from the subnet: 10.77.7.0 - 10.77.7.255 ]===
+ permit udp 10.77.7.0 0.0.0.255 host 10.77.5.1 eq ntp
+ remark ===[ We prohibit everything that is not parted, above ]===
+ deny   ip any any
+```
+
+```
+ip access-list extended NTP-NtpServerSourcePeers-ACL
+ remark ===[ Allow access to external NTP server - ntp.msk-ix.ru ]===
+ permit udp host 194.190.168.1 any
+ remark ===[ Allow access to external NTP server - ntp0.ntp-servers.net ]===
+ permit udp host 88.147.254.227 any
+ remark ===[ Allow access to external NTP server - ntp3.ntp-servers.net ]===
+ permit udp host 88.147.254.229 any
+ remark ===[ Allow access to external NTP server - ntp6.ntp-servers.net ]===
+ permit udp host 88.147.254.235 any
+ remark ===[ We prohibit everything that is not parted, above ]===
+ deny   ip any any
+```
+
+
+
 
 
 
