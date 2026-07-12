@@ -24,6 +24,12 @@ snmp mib flash cache
 
 Ввиду того что мы используем в своей работе самую распространенную на сегодняшний день версию SNMPv2c-протокола, у которой security-модель по сравнению с SNMPv1 осталось той же: community string, без шифрования стоит ограничит сбор SNMP-данных c определенных IP-адресов. Это делается по средствам access-листов:
 
+
+</code></pre>
+</details>
+<details>
+<summary>Для коммутатора</summary>
+<pre><code>
 ```
 ip access-list standard SNMP-SnmpAccessHost-ACL
  remark ===[ Allowing access to the SNMP protocol from an IP address: 10.67.1.34 (APP-XXXXXX04) ]===
@@ -31,3 +37,26 @@ ip access-list standard SNMP-SnmpAccessHost-ACL
  remark ===[ We prohibit everything that is not parted, above ]===
  deny   any
 ```
+</code></pre>
+</details>
+
+</code></pre>
+</details>
+<details>
+<summary>Для маршрутизатора</summary>
+<pre><code>
+```
+ip access-list extended SNMP-SnmpAccessHost-ACL
+ remark ===[ Allowing access to the SNMP protocol from an IP address: 10.67.1.34 (APP-XXXXXX04) ]===
+ permit udp host 10.67.1.34 any eq snmp
+ remark ===[ Allowing access to the SNMP protocol from an IP address: 10.67.1.34 (APP-XXXXXX04) ]===
+ permit udp host 10.67.1.34 any eq snmptrap
+ remark ===[ We prohibit access to the SNMP protocol from all other IP addresses ]===
+ deny   udp any any eq snmp
+ remark ===[ We prohibit access to the SNMP protocol from all other IP addresses ]===
+ deny   udp any any eq snmptrap
+ remark ===[ We prohibit everything that is not parted, above ]===
+ deny   ip any any
+```
+</code></pre>
+</details>
