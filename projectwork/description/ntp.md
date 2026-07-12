@@ -12,7 +12,10 @@
 
 
 
-
+```
+clock timezone MSK 3 0
+clock calendar-valid
+```
 
 ```
 ntp logging
@@ -52,7 +55,12 @@ ip access-list extended NTP-NtpServerSourcePeers-ACL
  deny   ip any any
 ```
 
-
+Для коммутатора
+```
+ntp logging
+ntp update-calendar
+ntp server 10.77.5.1 prefer source Vlan998
+```
 
 
 
