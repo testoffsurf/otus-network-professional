@@ -11,19 +11,37 @@
 Конфигурирование NTP протокола на сетевом оборудовании Cisco производиться следующим образом:
 
 1. Для начала мы установим свою временную зону (для Московского часового пояса - MSK); так же настроим периодическую синхронизацию календаря и времени clock, которое генерирует кварцевый резонатор, пока устройство Cisco включено:
-
 ```
 clock timezone MSK 3 0
 clock calendar-valid
 ```
 
+2. Затем нам необходимо определиться со списком NTP-серверов в сети Интернет, с которых мы будем забирать время. Тем самым ограничим круг внешних серверов для синхронизации времени и немного повысим безопасность:
+```
+ip access-list extended NTP-NtpServerSourcePeers-ACL
+ remark ===[ Allow access to external NTP server - ntp.msk-ix.ru ]===
+ permit udp host 194.190.168.1 any
+ remark ===[ Allow access to external NTP server - ntp0.ntp-servers.net ]===
+ permit udp host 88.147.254.227 any
+ remark ===[ Allow access to external NTP server - ntp3.ntp-servers.net ]===
+ permit udp host 88.147.254.229 any
+ remark ===[ Allow access to external NTP server - ntp6.ntp-servers.net ]===
+ permit udp host 88.147.254.235 any
+ remark ===[ We prohibit everything that is not parted, above ]===
+ deny   ip any any
+```
 
 
 
 
 
+3. 
 
 
+
+
+
+4. 
 
 
 ```
