@@ -20,7 +20,30 @@ ip access-list extended NAT-InternetAccess-ACL
 
 2. Затем помечаем интерфейсы которые будут участвовать в трансляции адресов. Внутренний интерфейс помечают командой ip nat inside, внешний — ip nat outside. Без этой разметки трансляция не сработает:
 ```
+interface GigabitEthernet0/0/1
+ description ===[ ISP: Dom.ru, Telephone: 8-495-981-45-71, Contract: 100771XXXXXX032 ]===
+ ip nat outside
 
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+ channel-group 1 mode active
+
+interface GigabitEthernet0/0/2
+ no ip address
+ negotiation auto
+ channel-group 1 mode active
+
+interface Port-channel1
+ description ===[ Trunk channel for the RT-EDGE-MSK02 <---> SW-ACCESS-MSK02 ]===
+ no ip address
+ no negotiation auto
+
+interface Port-channel1.100
+ description ===[ VLAN: Server equipment of a company store ]===
+ encapsulation dot1Q 100
+ ip address 10.77.6.1 255.255.255.224
+ ip nat inside
 ```
 
 
