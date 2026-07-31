@@ -1,1 +1,66 @@
+### DHCP (Dynamic Host Configuration Protocol)
 
+DHCP — это сетевой протокол прикладного уровня в сетях TCP/IP, который позволяет автоматически назначать IP-адреса и другие параметры конфигурации сетевым устройствам.
+<br><br>
+![](../picture/nat-concept.png)
+<br><br>
+
+
+
+
+
+
+
+
+
+
+NAT — это механизм в сетях TCP/IP, который позволяет преобразовывать IP-адреса транзитных пакетов при их прохождении через маршрутизирующее устройство. Он обеспечивает взаимодействие локальной сети с интернетом, скрывая внутренние IP-адреса устройств от внешней сети и экономя ограниченные публичные IP-адреса.
+<br><br>
+![](../picture/nat-concept.png)
+<br><br>
+Принцип работы NAT очень прост: когда устройство из частной сети отправляет пакет во внешнюю сеть, маршрутизатор перехватывает этот пакет и подменяет его исходный IP-адрес на свой внешний (видимый из интернета). Если используется PAT (Port Address Translation), дополнительно происходит преобразование номеров портов, чтобы различать пакеты от разных устройств за одним адресом. После этого пакет отправляется в интернет с изменённым адресом. Когда ответный пакет приходит обратно из внешней сети, маршрутизатор ищет соответствие во внутренней таблице NAT: на какой внутренний IP-адрес и порт нужно переслать этот ответ. Затем внешний IP-адрес в пакете снова заменяется на приватный, и данные доставляются нужному устройству внутри локальной сети.
+
+Настроить NAT на оборудовании Cisco очень просто:
+
+1. Для начала мы должны определиться что именно мы будем транслировать. Для этого мы создаем список доступа, в котором описываем какой трафик мы собираемся транслировать, а какой запретить к трансляции:
+```
+ip access-list extended NAT-InternetAccess-ACL
+ remark ===[ We allow access to the Internet to users from the subnet: 10.77.6.0, 10.77.7.0 ]===
+ permit ip 10.77.6.0 0.0.0.255 any
+ permit ip 10.77.7.0 0.0.0.255 any
+ remark ===[ We prohibit everything that is not parted, above ]===
+ deny   ip any any
+```
+
+2. Затем помечаем интерфейсы которые будут участвовать в трансляции адресов. Внутренний интерфейс помечают командой ip nat inside, внешний — ip nat outside. Без этой разметки трансляция не сработает:
+```
+interface GigabitEthernet0/0/1
+ description ===[ ISP: Dom.ru, Telephone: 8-495-981-45-71, Contract: 100771XXXXXX032 ]===
+ ip nat outside
+
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+ channel-group 1 mode active
+
+interface GigabitEthernet0/0/2
+ no ip address
+ negotiation auto
+ channel-group 1 mode active
+
+interface Port-channel1
+ description ===[ Trunk channel for the RT-EDGE-MSK02 <---> SW-ACCESS-MSK02 ]===
+ no ip address
+ no negotiation auto
+
+interface Port-channel1.100
+ description ===[ VLAN: Server equipment of a company store ]===
+ encapsulation dot1Q 100
+ ip address 10.77.6.1 255.255.255.224
+ ip nat inside
+```
+
+3. Финальным аккордом мы запускаем трансляцию следующей конфигурационной командой:
+```
+ip nat inside source list NAT-InternetAccess-ACL interface GigabitEthernet0/0/1 overload
+```
