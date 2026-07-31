@@ -40,3 +40,11 @@ ip dhcp pool VLAN-100
  lease 14
  update arp
 ```
+
+3. Если необходимо за каким либо сетевым оборудованием закрепить определенный IP-адрес, то воспользуемся следующими командами:
+```
+ip dhcp pool TANTOS-NC-MSK02-131
+ host 10.77.6.131 255.255.255.224
+ client-identifier 0100.46b8.2a0d.da
+ client-name TANTOS-NC-MSK02-131
+```
