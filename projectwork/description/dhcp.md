@@ -33,7 +33,7 @@ ip dhcp pool VLAN-100
  import all
  network 10.77.6.0 255.255.255.224
  default-router 10.77.6.1
- domain-name msk02.corp.mobilk.ru
+ domain-name msk02.corp.xxx-yyy.ru
  option 4 ip 10.77.5.1 
  option 42 ip 10.77.5.1 
  dns-server 10.77.6.1 
