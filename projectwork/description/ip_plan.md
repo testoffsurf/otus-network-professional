@@ -1,4 +1,4 @@
-<table class="iksweb">
+<table>
 	<tbody>
 		<tr>
 			<td>№ п/п</td>
