@@ -8,3 +8,77 @@
 | zebra stripes | are neat        |    $1 |
 
 
+
+
+
+
+<table>
+		<tr>
+			<td>№ п/п</td>
+			<td>Начальный адрес сети</td>
+			<td>Адресное пространство</td>
+			<td>Конечный адрес сети</td>
+			<td>Маска подсети</td>
+			<td>Обратная маска подсети</td>
+			<td>VLAN ID</td>
+			<td>Примечание</td>
+		</tr>
+		<tr>
+			<td colspan="8">IP-адресация для сетевого и технологического оборудования</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+</table>
+
+
+
+
+
