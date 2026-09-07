@@ -18,7 +18,7 @@
 ### 3. Защита
 
 ### 4. VPN-туннели
-- [FlexVPN ()](description/flexvpn.md)
+- [VPN (Virtual Private Network)](description/vpn.md)
 - [Remote access VPN](description/remoteaccess.md)
 
 
