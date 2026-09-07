@@ -60,7 +60,7 @@ aaa authentication login FLEXVPN-AnyConnectAuthenLoc-AAA local
 username test_user privilege 0 algorithm-type sha256 secret !Password0@
 ```
 
-6. Создаем политику авторизации IKEV2 где указываем пул IP адресов для выдачи удаленным пользователям, DNS-сервер, доменное имя и доступные маршруты:
+6. Создаем политику авторизации IKEv2 где указываем пул IP адресов для выдачи удаленным пользователям, DNS-сервер, доменное имя и доступные маршруты:
 ```
 ip access-list standard FLEXVPN-AnyConnectRoute-ACL
  remark ===[ Allow routing in subnets: 10.67.1.0, 10.67.2.0, 10.67.2.144, 10.67.4.0, 10.67.4.128 ]===
@@ -81,6 +81,30 @@ crypto ikev2 authorization policy FLEXVPN-AnyConnectAuthorizationPolicy-IKEV2
  route set access-list FLEXVPN-AnyConnectRoute-ACL
 ```
 
- 
+7. Создаем IKEv2 Proposal и затем ее привязываем к IKEv2 Policy:
+```
+crypto ikev2 proposal FLEXVPN-GeneralProposal-IKEV2
+ encryption aes-cbc-256
+ integrity sha256
+ group 19
+
+crypto ikev2 policy FLEXVPN-GeneralPolicy-IKEV2
+ proposal FLEXVPN-GeneralProposal-IKEV2
+```
+
+8. Создаем IKEv2 профиль:
+```
+crypto ikev2 profile FLEXVPN-AnyConnectProfile-IKEV2
+ description ===[ Profile of available authentication methods - AnyConnect ]===
+ match identity remote key-id *$AnyConnectClient$*
+ authentication local rsa-sig
+ authentication remote anyconnect-eap aggregate
+ pki trustpoint FLEXVPN-AnyConnectTrustPoint-CA
+ aaa authentication anyconnect-eap FLEXVPN-AnyConnectAuthenLoc-AAA
+ aaa authorization group anyconnect-eap list FLEXVPN-AnyConnectAuthorLoc-AAA FLEXVPN-AnyConnectAuthorizationPolicy-IKEV2
+ aaa authorization user anyconnect-eap cached
+ virtual-template 100
+```
+
 
 
