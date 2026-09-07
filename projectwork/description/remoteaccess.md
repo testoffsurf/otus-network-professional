@@ -18,7 +18,34 @@ FlexVPN сервер обязательно должен иметь сертиф
 
 Технология на сетевом оборудовании Cisco конфигурируется следующим образом:
 
+1. Включаем HTTP-сервер на маршрутизаторе:
+```
+ip http server
+```
 
+2. Делаем из маршрутизатора CA сервер:
+```
+crypto pki server FLEXVPN-AnyConnect-CA
+ no database archive
+ issuer-name cn="FLEXVPN-AnyConnect-CA"
+ grant auto
+ lifetime certificate 720
+ eku server-auth client-auth
+ database url flash:certificate
+```
+
+3. Создаем на маршрутизаторе сертификат для предъявления клиенту:
+```
+ip domain name xxx-yyy.ru
+
+crypto pki trustpoint FLEXVPN-AnyConnectTrustPoint-CA
+ enrollment url http://xxx.xxx.xxx.xxx:80
+ subject-name cn=FLEXVPN-AnyConnectTrustPoint-CA
+ revocation-check crl
+```
+В качестве URL  указывается IP адрес интерфейса, к которому будет подключаться клиент и получать сертификат. Как правило, это публичный "белый" IP адрес интерфейса маршрутизатора.
+
+4. 
 
 
 
