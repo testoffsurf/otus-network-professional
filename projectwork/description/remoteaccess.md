@@ -140,3 +140,5 @@ interface Virtual-Template100 type tunnel
  tunnel path-mtu-discovery
  tunnel protection ipsec profile FLEXVPN-AnyConnectProfile-IPSEC
 ```
+
+Полный текст конфигурационных файлов приведены [здесь](config/)
