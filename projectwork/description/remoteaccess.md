@@ -141,4 +141,4 @@ interface Virtual-Template100 type tunnel
  tunnel protection ipsec profile FLEXVPN-AnyConnectProfile-IPSEC
 ```
 
-Полный текст конфигурационных файлов приведены [здесь](config/)
+Полный текст конфигурационных файлов приведены [здесь](\config/)
