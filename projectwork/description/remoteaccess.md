@@ -57,7 +57,7 @@ aaa new-model
 aaa authorization network FLEXVPN-AnyConnectAuthorLoc-AAA local
 aaa authentication login FLEXVPN-AnyConnectAuthenLoc-AAA local
 
-username test_user privilege 0 algorithm-type sha256 secret !Password0@
+username test_user privilege 0 algorithm-type sha256 secret !Password!
 ```
 
 6. Создаем политику авторизации IKEv2 где указываем пул IP адресов для выдачи удаленным пользователям, DNS-сервер, доменное имя и доступные маршруты:
