@@ -18,9 +18,8 @@
 ### 3. Защита
 
 ### 4. VPN-туннели
-- [GRE (Generic Routing Encapsulation)](description/gre.md)
 - [FlexVPN ()](description/flexvpn.md)
-- [Remote access ()](description/remote_access.md)
+- [Remote access VPN](description/remoteaccess.md)
 
 
 
