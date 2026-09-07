@@ -106,5 +106,37 @@ crypto ikev2 profile FLEXVPN-AnyConnectProfile-IKEV2
  virtual-template 100
 ```
 
+9. Отключаем поиск сертификатов по URL в HTTP запросах, отключаем HTTP сервер:
+```
+no crypto ikev2 http-url cert
+no ip http server
+```
 
+10. Собираем воедино профиль IKEv2 и transform-set:
+```
+crypto ipsec transform-set FLEXVPN-GeneralTransformSet-IPSEC esp-aes 256 esp-sha256-hmac
+ mode tunnel
 
+crypto ipsec profile FLEXVPN-AnyConnectProfile-IPSEC
+ description ===[ We connect profiles with each other, AnyConnect: FLEXVPN-AnyConnectProfile-IKEV2 & FLEXVPN-GeneralTransformSet-IPSEC ]===
+ set transform-set FLEXVPN-GeneralTransformSet-IPSEC
+ set ikev2-profile FLEXVPN-AnyConnectProfile-IKEV2
+```
+
+11. Описываем виртуальный шаблон который применяется для клонирования конфигурации в Virtual-Access при установлении соединения:
+```
+interface Loopback100
+ description ===[ Tunnel termination - AnyConnect ]===
+ ip address 172.16.1.253 255.255.255.255
+ zone-member security LAN
+
+interface Virtual-Template100 type tunnel
+ description ===[ Dynamic Virtual Tunnel Interface Pattern - AnyConnect ]===
+ ip unnumbered Loopback100
+ ip mtu 1400
+ zone-member security LAN
+ ip tcp adjust-mss 1360
+ tunnel mode ipsec ipv4
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile FLEXVPN-AnyConnectProfile-IPSEC
+```
