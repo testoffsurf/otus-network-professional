@@ -49,4 +49,5 @@ ip dhcp pool TANTOS-NC-MSK02-131
  client-name TANTOS-NC-MSK02-131
 ```
 
+<br>
 Полный текст конфигурационных файлов приведены [здесь](../config/)
