@@ -104,6 +104,7 @@ interface Virtual-Template1 type tunnel
  tunnel protection ipsec profile FLEXVPN-GeneralProfile-IPSEC
 ```
 
+На этом настройка HUB(а) завершена, перейдем к настройке маршрутизатора на Spoke:
 
 
 
