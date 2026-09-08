@@ -60,3 +60,5 @@ ip access-list extended SNMP-SnmpAccessHost-ACL
 ```
 </code></pre>
 </details>
+
+Полный текст конфигурационных файлов приведены [здесь](../config/)
