@@ -20,6 +20,66 @@ Site-to-Site VPN создает туннель, который поднимае�
 - Во FlexVPN нет Multipoint GRE (mGRE), а только стандартный GRE протокол;
 - Нет необходимости в протоколах динамической маршрутизации (RIP, EIGRP, OSPF, и т.п.), если использовать встроенные возможности маршрутизации IKEv2.
 
+Конфигурирование топологии FlexVPN Spoke-to-Spoke на оборудовании Cisco происходит следующим образом:
+
+1. Создаем IKEv2 Proposal и затем ее привязываем к IKEv2 Policy:
+```
+crypto ikev2 proposal FLEXVPN-GeneralProposal-IKEV2
+ encryption aes-cbc-256
+ integrity sha256
+ group 19
+
+crypto ikev2 policy FLEXVPN-GeneralPolicy-IKEV2
+ proposal FLEXVPN-GeneralProposal-IKEV2
+```
+
+2. Создаем IKEv2 Keyring это репозиторий с набором предварительно заданных ключей (они используются для аутентификации указанных там устройств):
+```
+crypto ikev2 keyring FLEXVPN-GeneralKeyring-IKEV2
+ peer SPOKE
+  description ===[ Authentication settings for slave equipment ]===
+  address 0.0.0.0 0.0.0.0
+  pre-shared-key local !Password!
+  pre-shared-key remote !Password!
+```
+
+3. Прежде чем перейти к сборке Profile нам необходимо определиться со списком подсетей к которым мы разрешим доступ из филиалов (мы не будем использовать динамическую маршрутизацию, а воспользуемся возможностями самого протокола IKEv2 для обмена маршрутной информацией):
+```
+ip access-list standard FLEXVPN-RoutedSubnets-ACL
+ remark ===[ Allow routing in subnets: 10.67.1.0, 10.67.2.0, 10.67.2.144, 10.67.4.0, 10.67.4.128 ]===
+ permit 10.67.1.0 0.0.0.127
+ permit 10.67.2.0 0.0.0.127
+ permit 10.67.2.144 0.0.0.15
+ permit 10.67.4.0 0.0.0.127
+ permit 10.67.4.128 0.0.0.127
+ remark ===[ We prohibit everything that is not parted, above ]===
+ deny   any
+
+aaa new-model
+aaa authorization network FLEXVPN-AuthorizationLocal-AAA local
+
+crypto ikev2 authorization policy FLEXVPN-AuthorizationPolicy-IKEV2
+ route set interface
+ route set access-list FLEXVPN-RoutedSubnets-ACL
+```
+
+
+НЕ ГОТОВО
+4.
+```
+ip host RT-EDGE-GRN01.xxx-yyy.ru XXX.XXX.XXX.XXX
+ip domain name xxx-yyy.ru
+
+crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
+ description ==[ Profile of available authentication methods ]===
+ match identity remote fqdn domain xxx-yyy.ru
+ identity local fqdn RT-EDGE-GRN01.xxx-yyy.ru
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local FLEXVPN-GeneralKeyring-IKEV2
+ aaa authorization group psk list FLEXVPN-AuthorizationLocal-AAA FLEXVPN-AuthorizationPolicy-IKEV2
+ virtual-template 1
+```
 
 
 
