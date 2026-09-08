@@ -50,3 +50,5 @@ interface Port-channel1.100
 ```
 ip nat inside source list NAT-InternetAccess-ACL interface GigabitEthernet0/0/1 overload
 ```
+
+Полный текст конфигурационных файлов приведены [здесь](../config/)
