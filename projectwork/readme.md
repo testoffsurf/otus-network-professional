@@ -15,5 +15,5 @@
 
 ### 3. Защита периметра и VPN-туннели
 - [ZBF (Zone-Based Firewall)](description/zbf.md)
-- [VPN (Virtual Private Network)](description/vpn.md)
+- [Site-to-Site VPN (Virtual Private Network)](description/vpn.md)
 - [Remote access VPN](description/remoteaccess.md)
