@@ -70,3 +70,5 @@ ntp logging
 ntp update-calendar
 ntp server 10.77.5.1 prefer source Vlan998
 ```
+
+Полный текст конфигурационных файлов приведены [здесь](../config/)
