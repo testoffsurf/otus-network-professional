@@ -33,3 +33,5 @@ ip access-list extended DNS-DnsAccessRule-ACL
  remark ===[ We prohibit everything that is not parted, above ]===
  deny   ip any any
 ```
+
+Полный текст конфигурационных файлов приведены [здесь](../config/)
