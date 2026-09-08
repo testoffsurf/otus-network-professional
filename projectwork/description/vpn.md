@@ -63,13 +63,8 @@ crypto ikev2 authorization policy FLEXVPN-AuthorizationPolicy-IKEV2
  route set access-list FLEXVPN-RoutedSubnets-ACL
 ```
 
-
-НЕ ГОТОВО
-4.
+4. Собираем IKEv2 Profile это репозиторий фиксированных параметров IKE SA (таких как local или remote identities, доступных методов аутентификации и так далее). Причем на данном шаге IKEv2 Profile мы собрали на 99%:
 ```
-ip host RT-EDGE-GRN01.xxx-yyy.ru XXX.XXX.XXX.XXX
-ip domain name xxx-yyy.ru
-
 crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
  description ==[ Profile of available authentication methods ]===
  match identity remote fqdn domain xxx-yyy.ru
@@ -78,11 +73,15 @@ crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
  authentication local pre-share
  keyring local FLEXVPN-GeneralKeyring-IKEV2
  aaa authorization group psk list FLEXVPN-AuthorizationLocal-AAA FLEXVPN-AuthorizationPolicy-IKEV2
- virtual-template 1
 ```
 
 
 
 
 
+
+```
+crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
+  virtual-template 1
+```
 
