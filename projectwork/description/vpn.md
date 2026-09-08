@@ -20,7 +20,7 @@ Site-to-Site VPN создает туннель, который поднимае�
 - Во FlexVPN нет Multipoint GRE (mGRE), а только стандартный GRE протокол;
 - Нет необходимости в протоколах динамической маршрутизации (RIP, EIGRP, OSPF, и т.п.), если использовать встроенные возможности маршрутизации IKEv2.
 
-Конфигурирование топологии FlexVPN Spoke-to-Spoke на оборудовании Cisco происходит следующим образом:
+Конфигурирование топологии FlexVPN Spoke-to-Spoke на оборудовании Cisco происходит следующим образом. Начнем с конфигурирования HUB(а):
 
 1. Создаем IKEv2 Proposal и затем ее привязываем к IKEv2 Policy:
 ```
@@ -63,7 +63,7 @@ crypto ikev2 authorization policy FLEXVPN-AuthorizationPolicy-IKEV2
  route set access-list FLEXVPN-RoutedSubnets-ACL
 ```
 
-4. Собираем IKEv2 Profile это репозиторий фиксированных параметров IKE SA (таких как local или remote identities, доступных методов аутентификации и так далее). Причем на данном шаге IKEv2 Profile мы собрали на 99%:
+4. Собираем IKEv2 Profile это репозиторий фиксированных параметров IKE SA (таких как local или remote identities, доступных методов аутентификации и так далее). Для того чтобы в будущем упростить подключение новых филиалов, в строке конфигурации <b>match identity remote fqdn</b> пропишем лишь доменное имя <b>domain xxx-yyy.ru</b>:
 ```
 crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
  description ==[ Profile of available authentication methods ]===
@@ -73,15 +73,37 @@ crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
  authentication local pre-share
  keyring local FLEXVPN-GeneralKeyring-IKEV2
  aaa authorization group psk list FLEXVPN-AuthorizationLocal-AAA FLEXVPN-AuthorizationPolicy-IKEV2
+ virtual-template 1
+```
+
+5. Создаем IPSec Transform-set в котором указываем алгоритмы шифрования и хеширования, указываем в какой режиме будет работать туннельный интерфейс. После чего создаем IPSec Profile в котором связываем IKEv2 Profile и IPSec Transform-set:
+```
+crypto ipsec transform-set FLEXVPN-GeneralTransformSet-IPSEC esp-aes 256 esp-sha256-hmac
+ mode tunnel
+
+crypto ipsec profile FLEXVPN-GeneralProfile-IPSEC
+ description ===[ We connect profiles with each other: FLEXVPN-GerenalProfile-IKEV2 & FLEXVPN-GeneralTransformSet-IPSEC ]===
+ set transform-set FLEXVPN-GeneralTransformSet-IPSEC
+ set ikev2-profile FLEXVPN-GerenalProfile-IKEV2
+```
+
+6. Так как мы планируем в будущем подключать филиалы, нам необходимо создать динамический DVTI. На нем вместо IP адреса указывается IP unnumbered интерфейс Loopback. На самом интерфейсе Loopback должен быть указан IP адрес из той же подсети, что и туннельные интерфейсы на Spoke:
+```
+interface Loopback0
+ description ===[ Tunnel termination ]===
+ ip address 172.16.1.254 255.255.255.255
+
+interface Virtual-Template1 type tunnel
+ description ===[ Dynamic Virtual Tunnel Interface Pattern ]===
+ ip unnumbered Loopback0
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+ ip nhrp network-id 67
+ ip nhrp redirect
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile FLEXVPN-GeneralProfile-IPSEC
 ```
 
 
 
-
-
-
-```
-crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
-  virtual-template 1
-```
 
