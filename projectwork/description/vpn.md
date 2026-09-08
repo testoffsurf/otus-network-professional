@@ -108,3 +108,5 @@ interface Virtual-Template1 type tunnel
 
 
 
+Полный текст конфигурационных файлов приведены [здесь](../config/)
+
