@@ -78,24 +78,24 @@ policy-map type inspect ZBF-WAN-TO-LAN-PMAP
   drop
 ```
 
+4. Создаем пары зон безопасности zone-pair. Пары создаются только для зон источника/получателя трафика, где будут применяться политики безопасности. Включить обработку правил прохождения трафика, между зонами позволяет команда <b>service-policy type inspect</b>:
+```
+zone-pair security LAN-TO-WAN source LAN destination WAN
+ description ===[ The passage of network traffic from the LAN - security zone to the WAN - security zone ]=== 
+ service-policy type inspect ZBF-LAN-TO-WAN-PMAP
+zone-pair security WAN-TO-LAN source WAN destination LAN
+ description ===[ The passage of network traffic from the WAN - security zone to the LAN - security zone ]=== 
+ service-policy type inspect ZBF-WAN-TO-LAN-PMAP
+```
 
+5. Для активации правил ZBF необходимо интерфейсам присвоить соответствующие зоны которые были созданы на 1-м шаге (например):
+```
+interface Tunnel0
+ zone-member security LAN
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface GigabitEthernet0/0/1
+ description ===[ ISP: MTS.ru, Telephone: 8-800-250-09-90, Contract: XXXXXXXXXXXX ]===
+ zone-member security WAN
+```
 
 Полный текст конфигурационных файлов приведены [здесь](../config/)
