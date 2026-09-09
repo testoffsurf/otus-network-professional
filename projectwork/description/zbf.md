@@ -13,6 +13,85 @@ Zone-Based Firewall (ZBF) — это модель межсетевого экр�
 
 ZBF поддерживает концепцию «проверка по умолчанию» (default deny), что означает, что весь трафик, который не соответствует установленным политиками, блокируется. Это создает дополнительный уровень защиты, предотвращая несанкционированный доступ.
 
+Конфигурирование технологии ZBF на сетевом оборудовании Cisco производиться следующим образом:
+
+Создать зоны безопасности. После начального планирования определить требуемые зоны
+безопасности и присвоить им имена, используя команду:
+
+1. Создаем зоны безопасности:
+```
+zone security LAN
+ description ===[ LAN - security zone ]===
+zone security WAN
+ description ===[ WAN - security zone ]===
+```
+
+2. С помощью class-map, описываем трафик, к которому будет применяться требуемая политика безопасности при его прохождении между парой зон. На этом этапе используется специальный тип class-map, называемый <b>class-map type inspect</b> и он определяет, что именно будет инспектироваться:
+```
+class-map type inspect match-any ZBF-AllowedProtocolsOut-CMAP
+  description ===[ We describe the traffic that is allowed to pass through interfaces on the Internet ]===
+ match protocol dns
+ match protocol ftp
+ match protocol ftps
+ match protocol http
+ match protocol https
+ match protocol icmp
+ match protocol tcp
+ match protocol udp
+ match protocol imap
+ match protocol imap3
+ match protocol imaps
+ match protocol ntp
+ match protocol pop3
+ match protocol pop3s
+ match protocol smtp
+ match protocol ssh
+ match protocol sip
+class-map type inspect match-all ZBF-FLEXVPNAllowedProtocolsIn-CMAP
+  description ===[ We describe the traffic that is allowed to pass through interfaces from the Internet ]===
+ match access-group name FLEXVPN-AllowedProtocol-ACL
+class-map type inspect match-all ZBF-FLEXVPNAllowedProtocolsOut-CMAP
+  description ===[ We describe the traffic that is allowed to pass through interfaces on the Internet ]===
+ match access-group name FLEXVPN-AllowedProtocol-ACL
+class-map type inspect match-any ZBF-AllowedProtocolsIn-CMAP
+  description ===[ We describe the traffic that is allowed to pass through interfaces from the Internet ]===
+ match protocol icmp
+```
+
+3. Затем с помощью policy-map, описываем требуемые действия с трафиком, описанным ранее с помощью class-map. Для этих целей используется специальный тип policy-map, называемый <b>policy-map type inspect</b>:
+```
+policy-map type inspect ZBF-LAN-TO-WAN-PMAP
+ description ===[ We describe the rules for inspecting, passing and prohibiting traffic from LAN to WAN ]====
+ class type inspect ZBF-AllowedProtocolsOut-CMAP
+  inspect
+ class type inspect ZBF-FLEXVPNAllowedProtocolsOut-CMAP
+  pass
+ class class-default
+  drop
+policy-map type inspect ZBF-WAN-TO-LAN-PMAP
+ description ===[ We describe the rules for inspecting, passing and prohibiting traffic from WAN to LAN ]===
+ class type inspect ZBF-AllowedProtocolsIn-CMAP
+  inspect
+ class type inspect ZBF-FLEXVPNAllowedProtocolsIn-CMAP
+  pass
+ class class-default
+  drop
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
