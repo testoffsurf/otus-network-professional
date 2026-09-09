@@ -126,7 +126,7 @@ crypto ikev2 keyring FLEXVPN-GeneralKeyring-IKEV2
 
 3. Затем с помощью ikev2 authorization policy необходимо описать те подсети к которым мы разрешим доступ из других филиалов.
 
-4. Собираем IKEv2 Profile, при этом необходимо учесть следующее: требуется добавить проверку идентификатора identity для удалённого Spoke. В качестве альтернативы, как и на Hub(е), можно ограничиться проверкой только доменного имени (указание полного FQDN позволяет более точно разграничить взаимодействие между Spoke напрямую):
+4. Собираем IKEv2 Profile, при этом необходимо учесть следующее: требуется добавить проверку идентификатора identity для удалённого Spoke. В качестве альтернативы, как и на Hub(е), можно ограничиться проверкой только доменного имени (указание полного FQDN позволяет более точно разграничить взаимодействие между Spoke маршрутизаторами напрямую):
 ```
 crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
  description ==[ Profile of available authentication methods ]===
@@ -141,27 +141,30 @@ crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
 
 5. Создаем IPSec Transform-set, параметры которого должны быть такими же, как на HUB(е).
 
-6.
+6. Чтобы Spoke маршрутизаторы могли напрямую взаимодействовать друг с другом, необходимо настроить динамический туннельный интерфейс DVTI. Причем чтобы не создавать дополнительный интерфейс Loopback с еще одним IP адресом, воспользуемся ip unnumbered tunnel 0. В теле динамического туннельного интерфейса укажем для NHRP тот же network-id, что и на Hub(е), а также добавим ip nhrp shortcut, чтобы интерфейс мог принимать сообщения NHRP redirect:
+```
+interface Tunnel0
+ description ===[ Tunnel interface for communication with other branches and headquarters ]===
+ ip address 172.16.1.4 255.255.255.0
+ ip mtu 1400
+ ip nhrp network-id 67
+ ip nhrp shortcut virtual-template 1
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet0/0/1
+ tunnel destination XXX.XXX.XXX.XXX
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile FLEXVPN-GeneralProfile-IPSEC
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interface Virtual-Template1 type tunnel
+ description ===[ Dynamic Virtual Tunnel Interface Pattern ]===
+ ip unnumbered Tunnel0
+ ip mtu 1400
+ ip nhrp network-id 67
+ ip nhrp shortcut virtual-template 1
+ ip tcp adjust-mss 1360
+ tunnel source GigabitEthernet0/0/1
+ tunnel path-mtu-discovery
+ tunnel protection ipsec profile FLEXVPN-GeneralProfile-IPSEC
+```
 
 Полный текст конфигурационных файлов приведены [здесь](../config/)
-
