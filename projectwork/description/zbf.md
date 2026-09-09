@@ -91,6 +91,7 @@ zone-pair security WAN-TO-LAN source WAN destination LAN
 5. Для активации правил ZBF необходимо интерфейсам присвоить соответствующие зоны которые были созданы на 1-м шаге (например):
 ```
 interface Tunnel0
+ description ===[ Tunnel interface for communication with other branches and headquarters ]===
  zone-member security LAN
 
 interface GigabitEthernet0/0/1
