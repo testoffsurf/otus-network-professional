@@ -5,7 +5,7 @@
 
 
 ### 2. План IP адресации
-[Адресный план и VLAN-сегментация для филиала](description/ip-plan-branch.md)
+ - [Адресный план и VLAN-сегментация для филиала](description/ip-plan-branch.md)
 
 ### 3. Инфраструктурные сервисы
  - [NAT (Network Address Translation)](description/nat.md)
