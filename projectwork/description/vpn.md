@@ -106,16 +106,42 @@ interface Virtual-Template1 type tunnel
 
 На этом настройка HUB(а) завершена, перейдем к настройке маршрутизатора на Spoke:
 
+1. Создаем IKEv2 Proposal, параметры которого должны быть такими же, как на HUB(е).
 
+2. Создаем IKEv2 Keyring в котором указываем все Spoke с которыми мы будем взаимодействовать в будущем или настоящем:
+```
+crypto ikev2 keyring FLEXVPN-GeneralKeyring-IKEV2
+ peer RT-EDGE-GRN01
+  description ===[ Authentication settings for equipment located: ]===
+  address XXX.XXX.XXX.XXX
+  pre-shared-key local !Password!
+  pre-shared-key remote !Password!
 
+ peer RT-EDGE-MSK01
+  description ===[ Authentication settings for equipment located: ]===
+  address XXX.XXX.XXX.XXX
+  pre-shared-key local !Password!
+  pre-shared-key remote !Password!
+```
 
+3. Затем с помощью ikev2 authorization policy необходимо описать те подсети к которым мы разрешим доступ из других филиалов.
 
+4. Собираем IKEv2 Profile, при этом необходимо учесть следующее: требуется добавить проверку идентификатора identity для удалённого Spoke. В качестве альтернативы, как и на Hub(е), можно ограничиться проверкой только доменного имени (указание полного FQDN позволяет более точно разграничить взаимодействие между Spoke напрямую):
+```
+crypto ikev2 profile FLEXVPN-GerenalProfile-IKEV2
+ description ==[ Profile of available authentication methods ]===
+ match identity remote fqdn RT-EDGE-GRN01.xxx-yyy.ru
+ match identity remote fqdn RT-EDGE-MSK01.msk01.corp.xxx-yyy.ru
+ identity local fqdn RT-EDGE-KRD01.krd01.corp.xxx-yyy.ru
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local FLEXVPN-GeneralKeyring-IKEV2
+ aaa authorization group psk list FLEXVPN-AuthorizationLocal-AAA FLEXVPN-AuthorizationPolicy-IKEV2
+```
 
+5. Создаем IPSec Transform-set, параметры которого должны быть такими же, как на HUB(е).
 
-
-
-
-
+6.
 
 
 
