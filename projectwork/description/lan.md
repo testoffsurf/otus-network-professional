@@ -5,3 +5,5 @@
 </center><br><br>
 
 
+<img src="../picture/lan-old-concept.png" align="center" width="75%" height="75%">
+
