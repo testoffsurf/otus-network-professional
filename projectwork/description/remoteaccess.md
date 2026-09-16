@@ -162,7 +162,7 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 
 Файл можно отредактировать текстовым редактором. Необходимо найти следующую строку и
 поменять там значение false на true:
-<BypassDownloader><b>true</b></BypassDownloader>
+&lt;BypassDownloader&gt;<b>true</b>&lt;/BypassDownloader&gt;
 
 Иначе, после ввода учетных данных (логина и пароля) в диалоговом окне Cisco AnyConnect, может
 возникать ошибка «<b>The VPN client failed to establish a connection</b>». После внесения изменений следует перезапустить клиента AnyConnect, чтобы он мог заново прочитать конфигурацию.
