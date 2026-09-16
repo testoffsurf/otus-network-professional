@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnyConnectLocalPolicy xmlns="http://schemas.xmlsoap.org/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.xmlsoap.org/encoding/ AnyConnectLocalPolicy.xsd" acversion="4.10.06079">
+<BypassDownloader>true</BypassDownloader>
+<EnableCRLCheck>false</EnableCRLCheck>
+<ExcludeFirefoxNSSCertStore>false</ExcludeFirefoxNSSCertStore>
+<ExcludeMacNativeCertStore>false</ExcludeMacNativeCertStore>
+<ExcludePemFileCertStore>false</ExcludePemFileCertStore>
+<ExcludeWinNativeCertStore>false</ExcludeWinNativeCertStore>
+<FipsMode>false</FipsMode>
+<RestrictHelpWebDeploy>false</RestrictHelpWebDeploy>
+<RestrictLocalizationWebDeploy>false</RestrictLocalizationWebDeploy>
+<RestrictPreferenceCaching>false</RestrictPreferenceCaching>
+<RestrictResourceWebDeploy>false</RestrictResourceWebDeploy>
+<RestrictScriptWebDeploy>false</RestrictScriptWebDeploy>
+<RestrictServerCertStore>false</RestrictServerCertStore>
+<RestrictTunnelProtocols>false</RestrictTunnelProtocols>
+<RestrictWebLaunch>false</RestrictWebLaunch>
+<StrictCertificateTrust>false</StrictCertificateTrust>
+<UpdatePolicy>
+<AllowComplianceModuleUpdatesFromAnyServer>true</AllowComplianceModuleUpdatesFromAnyServer>
+<AllowHelpUpdatesFromAnyServer>true</AllowHelpUpdatesFromAnyServer>
+<AllowISEProfileUpdatesFromAnyServer>true</AllowISEProfileUpdatesFromAnyServer>
+<AllowLocalizationUpdatesFromAnyServer>true</AllowLocalizationUpdatesFromAnyServer>
+<AllowManagementVPNProfileUpdatesFromAnyServer>true</AllowManagementVPNProfileUpdatesFromAnyServer>
+<AllowResourceUpdatesFromAnyServer>true</AllowResourceUpdatesFromAnyServer>
+<AllowScriptUpdatesFromAnyServer>true</AllowScriptUpdatesFromAnyServer>
+<AllowServiceProfileUpdatesFromAnyServer>true</AllowServiceProfileUpdatesFromAnyServer>
+<AllowSoftwareUpdatesFromAnyServer>true</AllowSoftwareUpdatesFromAnyServer>
+<AllowVPNProfileUpdatesFromAnyServer>true</AllowVPNProfileUpdatesFromAnyServer></UpdatePolicy>
+</AnyConnectLocalPolicy>
