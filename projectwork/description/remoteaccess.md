@@ -14,8 +14,6 @@ Remote Access VPN — это технология, которая обеспеч
 
 FlexVPN сервер обязательно должен иметь сертификат, который он предоставляет удаленному пользователю при подключении для проверки подлинности этого сервера. Пользователь же может быть аутентифицирован сервером по имени и паролю, либо своему сертификату.
 
-По умолчанию, AnyConnect использует протокол SSL вместо IPSec, так что потребуется создать отдельный профиль для работы по IPSec. Это можно сделать с помощью редактора профилей AnyConnect «VPN Profile Editor».
-
 Технология на сетевом оборудовании Cisco конфигурируется следующим образом:
 
 1. Включаем HTTP-сервер на маршрутизаторе:
@@ -128,17 +126,21 @@ crypto ipsec profile FLEXVPN-AnyConnectProfile-IPSEC
 interface Loopback100
  description ===[ Tunnel termination - AnyConnect ]===
  ip address 172.16.1.253 255.255.255.255
- zone-member security LAN
-
+ 
 interface Virtual-Template100 type tunnel
  description ===[ Dynamic Virtual Tunnel Interface Pattern - AnyConnect ]===
  ip unnumbered Loopback100
  ip mtu 1400
- zone-member security LAN
- ip tcp adjust-mss 1360
+  ip tcp adjust-mss 1360
  tunnel mode ipsec ipv4
  tunnel path-mtu-discovery
  tunnel protection ipsec profile FLEXVPN-AnyConnectProfile-IPSEC
 ```
 
 Полный текст конфигурационных файлов приведены [здесь](../config/)
+
+### AnyConnect Client
+
+По умолчанию, AnyConnect использует протокол SSL вместо IPSec, так что потребуется создать отдельный профиль для работы по IPSec. Это можно сделать с помощью редактора профилей AnyConnect «VPN Profile Editor».
+
+
