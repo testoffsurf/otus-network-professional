@@ -179,13 +179,13 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 ![](../picture/anyconnect-connect.png)
 <br><br>
 
-<br><br>
+<br>
 ![](../picture/anyconnect-certificate.png)
-<br><br>
+<br>
 
-<br><br>
+<br>
 ![](../picture/anyconnect-password.png)
-<br><br>
+<br>
 
 Теперь можно в самом AnyConnect клиенте посмотреть различную информацию о подключении, включая статистику, маршруты, логи сообщений:
 <br><br>
