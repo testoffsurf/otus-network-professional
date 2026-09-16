@@ -142,10 +142,9 @@ interface Virtual-Template100 type tunnel
 ## AnyConnect VPN Profile Editor
 
 По умолчанию, AnyConnect использует протокол SSL вместо IPSec, так что потребуется создать отдельный профиль для работы по IPSec. Это можно сделать с помощью редактора профилей "<b>AnyConnect VPN Profile Editor</b>".
-
-<br><br>
+<br>
 ![](../picture/anyconnect-profile.png)
-<br><br>
+<br>
 
 В предлагаемом диалоговом окне, необходимо заполнить следующие поля:
    - <b>Primary Server</b> – название подключения, которое появится в выпадающем списке AnyConnect;
