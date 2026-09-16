@@ -171,9 +171,9 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 ## AnyConnect Client
 
 Перед подключением убедиться, что в настройках AnyConnect клиента установлены выделенные красным параметры:
-<br><br>
+<br><center>
 ![](../picture/anyconnect-setting.png)
-<br><br>
+</center><br>
 
 Затем подключиться к FlexVPN серверу, выбрав из списка название подключения, указанное ранее в профиле, подтвердить небезопасное подключение (само-подписанный сертификат) и ввести имя и пароль:
 <br><br>
