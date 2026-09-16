@@ -139,8 +139,25 @@ interface Virtual-Template100 type tunnel
 
 Полный текст конфигурационных файлов приведены [здесь](../config/)
 
-### AnyConnect Client
+## AnyConnect Client
 
 По умолчанию, AnyConnect использует протокол SSL вместо IPSec, так что потребуется создать отдельный профиль для работы по IPSec. Это можно сделать с помощью редактора профилей AnyConnect «VPN Profile Editor».
+
+<br><br>
+![](../picture/anyconnect-profile.png)
+<br><br>
+
+В предлагаемом диалоговом окне, необходимо заполнить следующие поля: <b>Primary Server</b> – название подключения, которое появится в выпадающем списке AnyConnect. <b>Primary Protocol</b> - IPsec, в <b>FQDN or IP Address</b> – IP-адрес FlexVPN сервера и убрать галку с <b>ASA gateway</b>, затем убедиться, что <b>Auth Method</b> выбран EAP-AnyConnect.
+
+
+
+
+
+
+
+
+
+
+
 
 
