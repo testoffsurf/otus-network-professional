@@ -181,7 +181,6 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 <br><br>
 
 Теперь можно в самом AnyConnect клиенте посмотреть различную информацию о подключении, включая статистику, маршруты, логи сообщений:
-
 <br><br>
 ![](../picture/anyconnect-statistics.png)
 <br><br>
