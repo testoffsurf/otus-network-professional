@@ -175,14 +175,11 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 <br><br>
 
 Затем подключиться к FlexVPN серверу, выбрав из списка название подключения, указанное ранее в профиле, подтвердить небезопасное подключение (само-подписанный сертификат) и ввести имя и пароль:
-<br><br>
-![](../picture/anyconnect-connect.png)
+<br>![](../picture/anyconnect-connect.png)
 
-<br><br>
-![](../picture/anyconnect-certificate.png)
+<br>![](../picture/anyconnect-certificate.png)
 
-<br><br>
-![](../picture/anyconnect-password.png)
+<br>![](../picture/anyconnect-password.png)
 
 Теперь можно в самом AnyConnect клиенте посмотреть различную информацию о подключении, включая статистику, маршруты, логи сообщений:
 <br><br>
