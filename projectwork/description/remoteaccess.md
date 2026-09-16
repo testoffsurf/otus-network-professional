@@ -139,7 +139,7 @@ interface Virtual-Template100 type tunnel
 
 Полный текст конфигурационных файлов приведены [здесь](../config/)
 
-## AnyConnect Client
+## AnyConnect VPN Profile Editor
 
 По умолчанию, AnyConnect использует протокол SSL вместо IPSec, так что потребуется создать отдельный профиль для работы по IPSec. Это можно сделать с помощью редактора профилей "<b>AnyConnect VPN Profile Editor</b>".
 
@@ -160,21 +160,38 @@ interface Virtual-Template100 type tunnel
 маршрутизатора, указанная в файле локальной политики, расположенного: "<b>C:\ProgramData\Cisco\Cisco
 AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 
-Файл можно отредактировать текстовым редактором. Необходимо найти следующую строку и
-поменять там значение false на true:<br>
+Файл можно отредактировать текстовым редактором. Необходимо найти следующую строку и поменять там значение false на true:<br>
 &lt;BypassDownloader&gt;<b>true</b>&lt;/BypassDownloader&gt;
 
 Иначе, после ввода учетных данных (логина и пароля) в диалоговом окне Cisco AnyConnect, может
 возникать ошибка «<b>The VPN client failed to establish a connection</b>». После внесения изменений следует перезапустить клиента AnyConnect, чтобы он мог заново прочитать конфигурацию.
 
+Полный текст конфигурационных файлов приведены [здесь](../addition/)
 
+## AnyConnect Client
 
+Перед подключением убедиться, что в настройках AnyConnect клиента установлены выделенные красным параметры:
 
+<br><br>
+![](../picture/anyconnect-setting.png)
+<br><br>
 
+Затем подключиться к FlexVPN серверу, выбрав из списка название подключения, указанное ранее в профиле, подтвердить небезопасное подключение (само-подписанный сертификат) и ввести имя и пароль:
 
+<br><br>
+![](../picture/anyconnect-connect.png)
+<br><br>
 
+Теперь можно в самом AnyConnect клиенте посмотреть различную информацию о подключении, включая статистику, маршруты, логи сообщений:
 
+<br><br>
+![](../picture/anyconnect-statistics.png)
+<br><br>
 
+<br><br>
+![](../picture/anyconnect-route.png)
+<br><br>
 
-
-
+<br><br>
+![](../picture/anyconnect-log.png)
+<br><br>
