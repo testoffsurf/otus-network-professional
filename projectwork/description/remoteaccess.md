@@ -179,11 +179,11 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 ![](../picture/anyconnect-connect.png)
 <br><br>
 
-<br>
+<br><br>
 ![](../picture/anyconnect-certificate.png)
 <br>
 
-<br>
+<br><br>
 ![](../picture/anyconnect-password.png)
 <br>
 
