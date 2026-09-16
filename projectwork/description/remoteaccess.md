@@ -154,7 +154,7 @@ interface Virtual-Template100 type tunnel
    - <b>ASA gateway</b> - убрать галку;
    - <b>Auth Method</b> - из списка выбрать значение EAP-AnyConnect.
 
-Созданный таким образом профиль для клиента AnyConnect следует поместить в папку «C:\ProgramData\Cisco\Cisco AnyConnect Secure Mobility Client\Profile» с любым именем, но расширением .xml, например AnyConnectProfile-Test.xml
+Созданный таким образом профиль для клиента AnyConnect следует поместить в папку «<b>C:\ProgramData\Cisco\Cisco AnyConnect Secure Mobility Client\Profile</b>» с любым именем, но расширением <b>xml</b>, например VPNProfile-Test.xml.
 
 Очень важно, убедиться, что отключена автоматическая загрузка программного обеспечения клиента AnyConnect с
 маршрутизатора, указанная в файле локальной политики, расположенного: "<b>C:\ProgramData\Cisco\Cisco
