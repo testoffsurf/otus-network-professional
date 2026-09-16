@@ -147,8 +147,25 @@ interface Virtual-Template100 type tunnel
 ![](../picture/anyconnect-profile.png)
 <br><br>
 
-В предлагаемом диалоговом окне, необходимо заполнить следующие поля: <b>Primary Server</b> – название подключения, которое появится в выпадающем списке AnyConnect. <b>Primary Protocol</b> - IPsec, в <b>FQDN or IP Address</b> – IP-адрес FlexVPN сервера и убрать галку с <b>ASA gateway</b>, затем убедиться, что <b>Auth Method</b> выбран EAP-AnyConnect.
+В предлагаемом диалоговом окне, необходимо заполнить следующие поля:
+   - <b>Primary Server</b> – название подключения, которое появится в выпадающем списке AnyConnect;
+   - <b>Primary Protocol</b> - из списка выбрать значение IPsec;
+   - <b>FQDN or IP Address</b> – указать IP-адрес FlexVPN сервера;
+   - <b>ASA gateway</b> - убрать галку;
+   - <b>Auth Method</b> - из списка выбрать значение EAP-AnyConnect.
 
+Созданный таким образом профиль для клиента AnyConnect следует поместить в папку «C:\ProgramData\Cisco\Cisco AnyConnect Secure Mobility Client\Profile» с любым именем, но расширением .xml, например AnyConnectProfile-Test.xml
+
+Очень важно, убедиться, что отключена автоматическая загрузка программного обеспечения клиента AnyConnect с
+маршрутизатора, указанная в файле локальной политики, расположенного: "C:\ProgramData\Cisco\Cisco
+AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml".
+
+Файл можно отредактировать текстовым редактором. Необходимо найти следующую строку и
+поменять там значение false на true:
+<BypassDownloader><b>true</b></BypassDownloader>
+
+Иначе, после ввода учетных данных (логина и пароля) в диалоговом окне Cisco AnyConnect, может
+возникать ошибка «<b>The VPN client failed to establish a connection</b>». После внесения изменений следует перезапустить клиента AnyConnect, чтобы он мог заново прочитать конфигурацию.
 
 
 
