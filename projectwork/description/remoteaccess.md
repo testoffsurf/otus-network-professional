@@ -171,7 +171,6 @@ AnyConnect Secure Mobility Client\ AnyConnectLocalPolicy.xml</b>".
 ## AnyConnect Client
 
 Перед подключением убедиться, что в настройках AnyConnect клиента установлены выделенные красным параметры:
-
 <br><br>
 ![](../picture/anyconnect-setting.png)
 <br><br>
