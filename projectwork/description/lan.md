@@ -46,7 +46,7 @@
   - уровень ядра (Core Layer) - агрегирует/объединяет уровни распределения в больших сетях.
 
 <center>
-<img src="../picture/lan--concept.png" align="center" width="90%" height="90%">
+<img src="../picture/lan-hierarchical-model.png" align="center" width="90%" height="90%">
 </center>
 
 
